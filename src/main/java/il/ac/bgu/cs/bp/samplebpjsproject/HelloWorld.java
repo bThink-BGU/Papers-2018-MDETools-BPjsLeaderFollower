@@ -2,7 +2,7 @@ package il.ac.bgu.cs.bp.samplebpjsproject;
 
 import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.BProgramRunner;
 import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.SingleResourceBProgram;
-import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.listeners.StreamLoggerListener;
+import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.listeners.PrintBProgramRunnerListener;
 
 /**
  * Simple class running a BPjs program that selects "hello world" events.
@@ -18,7 +18,7 @@ public class HelloWorld {
         BProgramRunner rnr = new BProgramRunner(bprog);
 
         // Print program events to the console
-        rnr.addListener( new StreamLoggerListener() );
+        rnr.addListener( new PrintBProgramRunnerListener() );
         
         // go!
         rnr.start();
