@@ -22,7 +22,7 @@ public class HelloWorld {
         rnr.addListener(new PrintBProgramRunnerListener() );
         
         // go!
-        rnr.start();
+        rnr.run();
     }
     
 }
