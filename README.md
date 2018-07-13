@@ -1,10 +1,16 @@
-# SampleBPjsProject
+# BPjsLeaderFollower
 
-A sample maven project using BPjs. Clone or fork this project to easily start your own prject using BPjs. This project has two files:
+This project is a solution to the [leader-follower challenge](https://mdetools.github.io/mdetools18/challengeproblem.html)
+from MODELS18. It controls a rover, making sure it to follows another rover. The controller logic is written
+in BP.
 
-* `src/main/resources/HelloBPjsWorld.js` BPjs "hello world" program.
-* `src/main/java/il/ac/bgu/cs/bp/samplebpjsproject/HelloWorld.java` Simple "main" class for running `HelloBPjsWorld.js` and emitting its events to stdout.
+## To run this
+* Download the simulators from https://mdetools.github.io/mdetools18/challengeproblem.html
+* Run the simulator for your platform, and `UnityObserver.jar`.
+* Run this project.
 
+## Notes
+* The settings (`config.txt` file) live in the resources folder.
 
 
 ## Please keep these:

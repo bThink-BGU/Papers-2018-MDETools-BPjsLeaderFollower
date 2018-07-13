@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
-    <!-- Change these to match your group and artifact IDs -->
     <groupId>il.ac.bgu.cs.bp</groupId>
-    <artifactId>SampleBPjsProject</artifactId>
-    <!-- / Change these to match your group and artifact IDs -->
-    
+    <artifactId>BPjsLeaderFollower</artifactId>
     <version>0.5-DEV</version>
     <packaging>jar</packaging>
     <properties>
@@ -18,7 +14,7 @@
         <dependency>
             <groupId>com.github.bthink-bgu</groupId>
             <artifactId>BPjs</artifactId>
-            <version>[0.8.0, 0.9.9]</version>
+            <version>0.9.1</version>
         </dependency>
     </dependencies>
 </project>
