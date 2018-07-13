@@ -4,15 +4,13 @@
 importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);
 
 
-var Telem = bp.EventSet("", function (e) {
+var AnyTelemetry = bp.EventSet("", function (e) {
     return e instanceof Telemetry;
 });
-//var tooClose = 12;
-//var tooFar = 15;
 
-bp.registerBThread("SpinToTarget", function () {
+bp.registerBThread("SpinToTarget", function() {
     while (true) {
-        et = bp.sync({waitFor: [Telem]});
+        et = bp.sync({waitFor: AnyTelemetry});
         DegToTarget = compDegToTarget(et.LeadX, et.LeadY, et.RovX, et.RovY, et.Compass);
         bp.log.info('Js-DegToTarget:' + DegToTarget);
         if (Math.abs(DegToTarget) > 4) {
@@ -27,19 +25,19 @@ bp.registerBThread("SpinToTarget", function () {
     }
 });
 
-bp.registerBThread("GoToTarget", function () {
+bp.registerBThread("GoToTarget", function() {
     while (true) {
-        et2 = bp.sync({waitFor: [Telem]});
+        et2 = bp.sync({waitFor: AnyTelemetry});
         bp.sync({waitFor: bp.Event("SpinDone")});
         bp.sync({request: bp.Event("GoToTarget")});
     }
 });
 
-bp.registerBThread("NotTooClose", function () {
+bp.registerBThread("NotTooClose", function() {
     tooClose = 12.5;
     tooFar = 15;
     while (true) {
-        et3 = bp.sync({waitFor: [Telem]});
+        et3 = bp.sync({waitFor: AnyTelemetry});
         while (et3.Dist < tooFar) {
             if (et3.Dist >= tooClose - (tooFar - tooClose)) {
                 bp.sync({waitFor: bp.Event("SpinDone"), block: bp.Event("GoToTarget")});
@@ -49,7 +47,7 @@ bp.registerBThread("NotTooClose", function () {
                 bp.sync({waitFor: bp.Event("SpinDone"), block: bp.Event("GoToTarget")});
                 bp.sync({request: GoSlowGradient(-100), block: bp.Event("GoToTarget")});
             }
-            et3 = bp.sync({waitFor: [Telem], block: bp.Event("GoToTarget")});
+            et3 = bp.sync({waitFor: AnyTelemetry, block: bp.Event("GoToTarget")});
         }
     }
 });

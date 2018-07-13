@@ -11,47 +11,47 @@ public class DriveCommands {
         name = n;
     }
 
-    public void Left() {
+    public void left() {
         rover.noReply(name + ",setLRPower(-50,50)");
         System.out.println(name + ",setLRPower(-50,50)");
     }
 
-    public void Right() {
+    public void right() {
         rover.noReply(name + ",setLRPower(50,-50)");
         System.out.println(name + ",setLRPower(50,-50)");
     }
 
-    public void Go() {
+    public void go() {
         rover.noReply(name + ",setLRPower(100,100)");
         System.out.println(name + ",setLRPower(100,100)");
     }
 
-    public void Stop() {
+    public void stop() {
         rover.noReply(name + ",setLRPower(0,0)");
         System.out.println(name + ",setLRPower(0,0)");
     }
 
-    public void Reverse() {
+    public void reverse() {
         rover.noReply(name + ",setLRPower(-100,-100)");
         System.out.println(name + ",setLRPower(-100,-100)");
     }
 
-    public void Brake(boolean on) {
-        if (on == true) {
+    public void brake(boolean on) {
+        if ( on ) {
             rover.noReply(name + ",brake(100)");
             System.out.println(name + ",brake(100)");
         } else {
             rover.noReply(name + ",brake(0)");
+            System.out.println(name + ",brake(0)");
         }
-        System.out.println(name + ",brake(0)");
     }
 
-    public void Place() {
+    public void place() {
         rover.noReply(name + ",place()");
         System.out.println(name + ",place()");
     }
 
-    public void ControlPower(int L, int R) {
+    public void controlPower(int L, int R) {
         rover.noReply(name + ",setLRPower(" + L + "," + R + ")");
         System.out.println(name + ",setLRPower(" + L + "," + R + ")");
     }
