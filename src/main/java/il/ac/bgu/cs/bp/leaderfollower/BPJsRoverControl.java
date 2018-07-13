@@ -168,22 +168,22 @@ public class BPJsRoverControl {
                     });
 
                     bp.enqueueExternalEvent(new Telemetry(RoverGpsData.x, RoverGpsData.y, LeaderGpsData.x, LeaderGpsData.y, compassDeg, distance));
-                    if (stepCount <= maxSteps) {
+                    if (stepCount < maxSteps) {
                         System.out.println(stepCount);
                         d2TAllTime[stepCount] = deg2Target;
                         disAllTime[stepCount] = distance;
-                        if (stepCount == maxSteps) {
-                            System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
-                            System.out.println("DistArray: " + Arrays.toString(disAllTime));
-                            try {
-                                writeToFile("SimData5NDegN.csv", "DegToTarget: ", d2TAllTime);
-                                writeToFile("SimData5NDistN.csv", "DistanceToTarget: ", disAllTime);
-                                drive.brake(true);
-                                rover.close();
-                                System.exit(0);
-                            } catch (IOException ex) {
-                                Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                        
+                    } else if (stepCount == maxSteps) {
+                        System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
+                        System.out.println("DistArray: " + Arrays.toString(disAllTime));
+                        try {
+                            writeToFile("SimData5NDegN.csv", "DegToTarget: ", d2TAllTime);
+                            writeToFile("SimData5NDistN.csv", "DistanceToTarget: ", disAllTime);
+                            drive.brake(true);
+                            rover.close();
+                            System.exit(0);
+                        } catch (IOException ex) {
+                            Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     stepCount++;

@@ -27,7 +27,7 @@ bp.registerBThread("SpinToTarget", function() {
 
 bp.registerBThread("GoToTarget", function() {
     while (true) {
-        et2 = bp.sync({waitFor: AnyTelemetry});
+        bp.sync({waitFor: AnyTelemetry});
         bp.sync({waitFor: bp.Event("SpinDone")});
         bp.sync({request: bp.Event("GoToTarget")});
     }
@@ -35,7 +35,7 @@ bp.registerBThread("GoToTarget", function() {
 
 bp.registerBThread("NotTooClose", function() {
     tooClose = 12.5;
-    tooFar = 15;
+    tooFar = 14.5;
     while (true) {
         et3 = bp.sync({waitFor: AnyTelemetry});
         while (et3.Dist < tooFar) {
