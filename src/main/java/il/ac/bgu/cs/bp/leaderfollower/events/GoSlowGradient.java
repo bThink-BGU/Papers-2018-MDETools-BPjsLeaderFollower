@@ -4,7 +4,7 @@ import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 
 
 @SuppressWarnings("serial")
-public class GoSlowGradient extends BEvent {
+public class GoSlowGradient extends BEvent implements java.io.Serializable {
         
         public int power;
 	

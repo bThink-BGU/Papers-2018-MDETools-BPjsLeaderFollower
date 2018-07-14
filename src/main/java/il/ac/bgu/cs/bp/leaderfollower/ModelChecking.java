@@ -37,6 +37,8 @@ public class ModelChecking {
         
         if ( verificationResult.isCounterExampleFound() ) {
             System.out.println("Counter example found. Type: " + verificationResult.getViolationType());
+            System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
+            
             verificationResult.getCounterExampleTrace().forEach( e -> System.out.println(e) );
         } else {
             System.out.println("No counter example found.");

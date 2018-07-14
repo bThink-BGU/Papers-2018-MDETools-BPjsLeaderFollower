@@ -6,7 +6,7 @@ import il.ac.bgu.cs.bp.bpjs.model.BEvent;
  * An event that holds all the current telemetry
  */
 @SuppressWarnings("serial")
-public class Telemetry extends BEvent {
+public class Telemetry extends BEvent implements java.io.Serializable {
 
 	/**
 	 * The Telemetry

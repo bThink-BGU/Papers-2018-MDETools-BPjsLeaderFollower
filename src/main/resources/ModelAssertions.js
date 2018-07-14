@@ -14,7 +14,7 @@ importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);
 var EXTERNAL_ROVER_EVENT_NAME_FILTER = /^(GoSlow|Turn|Stop|GoToTarget)/
 
 var esExternalRoverEvents = bp.EventSet("externalRoverEvents", function(e){
-  return e.name.match(EXTERNAL_ROVER_EVENT_NAME_FILTER);
+  return (e.name.match(EXTERNAL_ROVER_EVENT_NAME_FILTER) !== null);
 });
 
 var esVeryCloseTelems = bp.EventSet("telem-close", function(e){
@@ -30,7 +30,7 @@ var esVeryCloseTelems = bp.EventSet("telem-close", function(e){
 bp.registerBThread("When too close, don't go forward", function(){
   bp.sync({waitFor:esVeryCloseTelems});
   var instruction = bp.sync({waitFor:esExternalRoverEvents});
-  bp.ASSERT(instruction !== StaticEvents.GoToTarget, "Rover advanced while too close to leader." );
+  bp.ASSERT(instruction !== StaticEvents.GO_TO_TARGET, "Rover advanced while too close to leader." );
 });
 
 // not in direction (must spin)

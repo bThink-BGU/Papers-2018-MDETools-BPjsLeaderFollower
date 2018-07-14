@@ -125,7 +125,7 @@ public class BPJsRoverControl {
                 if (theEvent instanceof GoSlowGradient) {
                     drive.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
                 }
-                if (theEvent.equals(StaticEvents.BrakeOn)) {
+                if (theEvent.equals(StaticEvents.BREAK_ON)) {
                     drive.brake(true);
                 }
                 if (theEvent.equals(StaticEvents.TICK)) {
