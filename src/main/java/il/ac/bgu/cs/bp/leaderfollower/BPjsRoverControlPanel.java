@@ -84,7 +84,7 @@ public class BPjsRoverControlPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    bp.enqueueExternalEvent(StaticEvents.StartControl);
+                    bp.enqueueExternalEvent(StaticEvents.START_CONTROL);
                     System.out.println("SimStarted");
                 }
             }
@@ -96,7 +96,7 @@ public class BPjsRoverControlPanel {
         Startbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bp.enqueueExternalEvent(StaticEvents.StartControl);
+                bp.enqueueExternalEvent(StaticEvents.START_CONTROL);
                 System.out.println("SimStarted");
             }
         });

@@ -92,11 +92,7 @@ public class BPJsRoverControl {
             
             @Override
             public void eventSelected(BProgram bp, BEvent theEvent) {
-                ExtractedGpsData LeaderGpsData;
-                ExtractedGpsData RoverGpsData;
-                Double distance, compassDeg, deg2Target;
-
-                if (theEvent.equals(StaticEvents.StartControl)) {
+                if (theEvent.equals(StaticEvents.START_CONTROL)) {
                     robotControlPanel.Startbutton.setEnabled(false);
                     System.out.println("program: " + ref.send("ready"));
                     Thread tmrThread = new Thread(() -> {
@@ -111,32 +107,20 @@ public class BPJsRoverControl {
                             } catch (InterruptedException e1) {
                                 e1.printStackTrace();
                             }
-                            bp.enqueueExternalEvent(StaticEvents.Tick);
+                            bp.enqueueExternalEvent(StaticEvents.TICK);
                         }
                     });
                     tmrThread.start();
                 }
 
-                if (theEvent.equals(StaticEvents.TurnLeft)) {
+                if (theEvent.equals(StaticEvents.TURN_LEFT)) {
                     drive.left();
                 }
-                if (theEvent.equals(StaticEvents.TurnRight)) {
+                if (theEvent.equals(StaticEvents.TURN_RIGHT)) {
                     drive.right();
                 }
-                if (theEvent.equals(StaticEvents.ForwardTurnLeft)) {
-                    drive.controlPower(0, 100);
-                }
-                if (theEvent.equals(StaticEvents.ForwardTurnRight)) {
-                    drive.controlPower(100, 0);
-                }
-                if (theEvent.equals(StaticEvents.Go2Target)) {
+                if (theEvent.equals(StaticEvents.GO_TO_TARGET)) {
                     drive.go();
-                }
-                if (theEvent.equals(StaticEvents.Stop)) {
-                    drive.controlPower(0, 0);
-                }
-                if (theEvent.equals(StaticEvents.GoSlow)) {
-                    drive.controlPower(40, 40);
                 }
                 if (theEvent instanceof GoSlowGradient) {
                     drive.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
@@ -144,30 +128,25 @@ public class BPJsRoverControl {
                 if (theEvent.equals(StaticEvents.BrakeOn)) {
                     drive.brake(true);
                 }
-                if (theEvent.equals(StaticEvents.BrakeOff)) {
-                }
-                if (theEvent.equals(StaticEvents.Tick)) {
-                    LeaderGpsData = new ExtractedGpsData(ref.send("Leader,GPS()"));
-                    RoverGpsData = new ExtractedGpsData(rover.send("Rover,GPS()"));
+                if (theEvent.equals(StaticEvents.TICK)) {
+                    Double distance, compassDeg, deg2Target;
+                    ExtractedGpsData leaderGpsData = new ExtractedGpsData(ref.send("Leader,GPS()"));
+                    ExtractedGpsData roverGpsData = new ExtractedGpsData(rover.send("Rover,GPS()"));
                     distance = extractData(ref.send("Leader,Distance()"));
                     compassDeg = extractData(rover.send("Rover,getCompass()"));
-                    deg2Target = compDeg2Target(LeaderGpsData.x, LeaderGpsData.y, RoverGpsData.x, RoverGpsData.y, compassDeg);
+                    deg2Target = compDeg2Target(leaderGpsData.x, leaderGpsData.y, roverGpsData.x, roverGpsData.y, compassDeg);
                     
                     SwingUtilities.invokeLater(()->{
-                        robotControlPanel.LeaderGPSY_Text.setText(fmt.format(LeaderGpsData.y));
-                        robotControlPanel.LeaderGPSX_Text.setText(fmt.format(LeaderGpsData.x));
-                        robotControlPanel.RoverGPSX_Text.setText(fmt.format(LeaderGpsData.x));
-                        robotControlPanel.RoverGPSY_Text.setText(fmt.format(LeaderGpsData.y));
+                        robotControlPanel.LeaderGPSY_Text.setText(fmt.format(leaderGpsData.y));
+                        robotControlPanel.LeaderGPSX_Text.setText(fmt.format(leaderGpsData.x));
+                        robotControlPanel.RoverGPSX_Text.setText(fmt.format(leaderGpsData.x));
+                        robotControlPanel.RoverGPSY_Text.setText(fmt.format(leaderGpsData.y));
                         robotControlPanel.Distance_Text.setText(fmt.format(distance));
-                        if (distance < 12 || distance > 15) {
-                            robotControlPanel.Distance_Text.setBackground(Color.RED);
-                        } else {
-                            robotControlPanel.Distance_Text.setBackground(Color.GREEN);
-                        }
+                        robotControlPanel.Distance_Text.setBackground( (distance<12||distance>15) ? Color.RED : Color.GREEN );
                         robotControlPanel.Deg2Target_Text.setText(fmt.format(deg2Target));
                     });
 
-                    bp.enqueueExternalEvent(new Telemetry(RoverGpsData.x, RoverGpsData.y, LeaderGpsData.x, LeaderGpsData.y, compassDeg, distance));
+                    bp.enqueueExternalEvent(new Telemetry(roverGpsData.x, roverGpsData.y, leaderGpsData.x, leaderGpsData.y, compassDeg, distance));
                     if (stepCount < maxSteps) {
                         System.out.println(stepCount);
                         d2TAllTime[stepCount] = deg2Target;
@@ -179,7 +158,6 @@ public class BPJsRoverControl {
                         try {
                             writeToFile("SimData5NDegN.csv", "DegToTarget: ", d2TAllTime);
                             writeToFile("SimData5NDistN.csv", "DistanceToTarget: ", disAllTime);
-                            drive.brake(true);
                             rover.close();
                             System.exit(0);
                         } catch (IOException ex) {

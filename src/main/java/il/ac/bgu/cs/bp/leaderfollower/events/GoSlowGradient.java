@@ -7,7 +7,6 @@ import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 public class GoSlowGradient extends BEvent {
         
         public int power;
-
 	
 	public GoSlowGradient(int power) {
 		super("GoSlowGradient(" + power + ")");
