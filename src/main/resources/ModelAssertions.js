@@ -26,6 +26,15 @@ var esVeryCloseTelems = bp.EventSet("telem-close", function(e){
   }
 });
 
+var esNotFacingTarget = bp.EventSet("not facing target", function(et){
+  if ( et instanceof Telemetry ) {
+    var degToTarget = compDegToTarget(et.LeadX, et.LeadY, et.RovX, et.RovY, et.Compass);
+    return (degToTarget > 4);
+  } else {
+    return false;
+  }
+});
+
 // too close
 bp.registerBThread("When too close, don't go forward", function(){
   bp.sync({waitFor:esVeryCloseTelems});
@@ -34,6 +43,13 @@ bp.registerBThread("When too close, don't go forward", function(){
 });
 
 // not in direction (must spin)
+bp.registerBThread("When not in direction, don't go forward", function(){
+  bp.sync({waitFor:esNotFacingTarget});
+  bp.log.info("NOT FACING TARGET");
+  var instruction = bp.sync({waitFor:esExternalRoverEvents});
+  bp.log.info("instruction: " + instruction.name);
+  bp.ASSERT(instruction !== StaticEvents.GO_TO_TARGET, "Rover advanced while not facing the leader." );
+});
 
 // far and in direction -> go
 

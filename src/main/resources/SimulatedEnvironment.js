@@ -13,20 +13,25 @@ importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);
 
 bp.registerBThread("environment", function(){
   bp.sync({request:StaticEvents.START_CONTROL});
-  bp.sync({request:StaticEvents.TICK});
 
-  var quiteClose = new Telemetry(10, 10, 10, 12, 0, 2);
-  bp.sync({request:quiteClose});
+  bp.sync({request:StaticEvents.TICK});
+  var tooClose = new Telemetry(10, 10, 10, 12, 0, 2);
+  bp.sync({request:tooClose});
+
+  bp.sync({request:StaticEvents.TICK});
+  var inRangeNotInDirection = new Telemetry(10, 10, 23, 10, 0, 13);
   bp.sync({waitFor:esExternalRoverEvents});
-  bp.sync({request:StaticEvents.TICK});
 
+  bp.sync({request:StaticEvents.TICK});
   var inRangeInDirection = new Telemetry(10, 10, 10, 23, 0, 13);
   bp.sync({request:inRangeInDirection});
-  bp.sync({waitFor:esExternalRoverEvents});
   bp.sync({request:StaticEvents.TICK});
 
-  var inRangeNotInDirection = new Telemetry(10, 10, 23, 10, 0, 13);
-  bp.sync({request:inRangeNotInDirection});
-  bp.sync({waitFor:esExternalRoverEvents});
-  bp.sync({request:StaticEvents.TICK});
 });
+
+bp.registerBThread("createSuperSteps", function(){
+  while ( true ) {
+    bp.sync({waitFor:AnyTelemetry});
+    bp.sync({waitFor:esExternalRoverEvents, block:StaticEvents.TICK});
+  }
+})

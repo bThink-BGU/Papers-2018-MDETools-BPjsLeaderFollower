@@ -1,7 +1,9 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
+import il.ac.bgu.cs.bp.bpjs.analysis.BProgramStateVisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsBProgramVerifier;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
+import il.ac.bgu.cs.bp.bpjs.analysis.VisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
@@ -33,11 +35,17 @@ public class ModelChecking {
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
         vfr.setMaxTraceLength(300);
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
+        vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(false) );
+        
+        vfr.setDetectDeadlocks(false); // Should go away in next version
+        
         VerificationResult verificationResult = vfr.verify(model);
         
         if ( verificationResult.isCounterExampleFound() ) {
             System.out.println("Counter example found. Type: " + verificationResult.getViolationType());
-            System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
+            if ( verificationResult.getFailedAssertion() != null ) {
+                System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
+            }
             
             verificationResult.getCounterExampleTrace().forEach( e -> System.out.println(e) );
         } else {
