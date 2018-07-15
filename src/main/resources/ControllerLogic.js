@@ -17,12 +17,6 @@ bp.registerBThread("GoToTarget", function() {
   }
 });
 
-var MOVE_FORWARD_EVENTS = /^(GoSlow|GoToTarget)/
-
-var exMoveFwdEvents = bp.EventSet("moveFwdEvents", function(e) {
-  return (e.name.match(MOVE_FORWARD_EVENTS) !== null);
-});
-
 // Fixes rover orientation while blocking forward movement.
 bp.registerBThread("SpinToTarget", function() {
   while (true) {
@@ -32,15 +26,9 @@ bp.registerBThread("SpinToTarget", function() {
     if (Math.abs(degToTarget) > 4) {
       // must correct rover orientation
       if (degToTarget > 0) {
-        bp.sync({
-          request: StaticEvents.TURN_RIGHT,
-          block: exMoveFwdEvents
-        });
+        bp.sync({request: StaticEvents.TURN_RIGHT});
       } else {
-        bp.sync({
-          request: StaticEvents.TURN_LEFT,
-          block: exMoveFwdEvents
-        });
+        bp.sync({request: StaticEvents.TURN_LEFT});
       }
 
     } else {

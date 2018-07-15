@@ -24,7 +24,7 @@ public class Telemetry extends BEvent implements java.io.Serializable {
         public Double Dist;
 
 	
-	public Telemetry(Double RovX, Double RovY,Double LeadX, Double LeadY,Double Compass, Double Dist) {
+	public Telemetry(Double RovX, Double RovY, Double LeadX, Double LeadY, Double Compass, Double Dist) {
 		super("Telemetry(" + RovX + "," + RovY +"," + LeadX +"," + LeadY +"," + Compass +"," + Dist + ")");
 		this.RovX = RovX;
                 this.RovY = RovY;
