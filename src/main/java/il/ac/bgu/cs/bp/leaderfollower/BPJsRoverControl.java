@@ -175,10 +175,8 @@ public class BPJsRoverControl {
         });
         rnr.run();
     }
-    // file read
 
     public static List<String> readResource(String fileName) {
-        File file = new File(fileName);
         // this gives you a 2-dimensional array of strings
         List<String> data = new ArrayList<>();
 
@@ -271,7 +269,7 @@ public class BPJsRoverControl {
 //                System.out.println("DDeg5: " + DDeg.toString());
             }
         }
-        System.out.println("DDeg5: " + DDeg.toString());
+//        System.out.println("DDeg5: " + DDeg.toString());
         return DDeg;
     }
 }

@@ -9,6 +9,6 @@ public class StaticEvents {
     public static final BEvent TURN_LEFT = new BEvent("TurnLeft");
     public static final BEvent TURN_RIGHT = new BEvent("TurnRight");
     public static final BEvent BREAK_ON = new BEvent("BrakeOn");
-    public static final BEvent SPIN_DONE = new BEvent("SpinDone");
+    public static final BEvent ORIENTATION_OK = new BEvent("OrientationOK");
     public static final BEvent GO_TO_TARGET = new BEvent("GoToTarget");
 }
