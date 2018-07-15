@@ -37,7 +37,7 @@ public class ModelChecking {
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
         vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(false) );
         
-        vfr.setDetectDeadlocks(false); // Should go away in next version
+//        vfr.setDetectDeadlocks(false); // Should go away in next version
         
         VerificationResult verificationResult = vfr.verify(model);
         

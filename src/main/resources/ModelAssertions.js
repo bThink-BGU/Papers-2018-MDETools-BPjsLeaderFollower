@@ -36,14 +36,14 @@ var esNotFacingTarget = bp.EventSet("not facing target", function(et){
 });
 
 // too close
-bp.registerBThread("When too close, don't go forward", function(){
+bp.registerBThread("REQ_too close", function(){
   bp.sync({waitFor:esVeryCloseTelems});
   var instruction = bp.sync({waitFor:esExternalRoverEvents});
   bp.ASSERT(instruction !== StaticEvents.GO_TO_TARGET, "Rover advanced while too close to leader." );
 });
 
 // not in direction (must spin)
-bp.registerBThread("When not in direction, don't go forward", function(){
+bp.registerBThread("REQ_not facing", function(){
   bp.sync({waitFor:esNotFacingTarget});
   bp.log.info("NOT FACING TARGET");
   var instruction = bp.sync({waitFor:esExternalRoverEvents});
