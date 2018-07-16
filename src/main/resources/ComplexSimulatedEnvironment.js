@@ -87,8 +87,8 @@ bp.registerBThread("leader-acts", function(){
 
 // This b-thread maintains a picture of the world.
 bp.registerBThread("world-status", function(){
-  var leader = statusCreate(0, 13.5, 0);
-  var rover = statusCreate(0, 0, 0);
+  var leader = statusCreate(1, 15, 0);
+  var rover = statusCreate(1, 1, 0);
 
   bp.sync({waitFor:StaticEvents.START_CONTROL});
 
@@ -149,10 +149,6 @@ var ROVER_ROTATION_UNIT = 1;
 // Length of movement of the rover in a single step, with power=100.
 var ROVER_MAX_STEP = 6;
 
-// How long does it take the rover to stop
-// TODO change this into a function of the rover's speed.
-var ROVER_BREAK_DISTANCE = 1;
-
 function parseExternalRoverEvent( rover, evt ) {
   bp.log.info("Rover event:" + evt );
   switch (evt.name) {
@@ -164,9 +160,6 @@ function parseExternalRoverEvent( rover, evt ) {
       break;
     case StaticEvents.GO_TO_TARGET.name:
       return statusMove(rover, ROVER_MAX_STEP);
-      break;
-    case StaticEvents.BREAK_ON.name:
-      return statusMove(rover, ROVER_BREAK_DISTANCE);
       break;
     default:
       if ( evt.name.match(/^GoSlowGradient/) ) {
