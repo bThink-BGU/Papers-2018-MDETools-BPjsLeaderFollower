@@ -20,6 +20,7 @@ public class RunComplexEnvironment {
     public void start() throws IOException {
         BProgram model = new SingleResourceBProgram("ControllerLogic.js");
         model.prependSource( readResource("CommonLib.js") );
+        model.prependSource("bp.log.setLevel(\"Fine\");");
         model.appendSource( readResource("ComplexSimulatedEnvironment.js") );
         
         BProgramRunner rnr = new BProgramRunner(model);

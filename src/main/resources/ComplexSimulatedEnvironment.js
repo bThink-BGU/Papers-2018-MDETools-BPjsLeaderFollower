@@ -1,8 +1,6 @@
 // This is a complex environment with some basic physics simulation.
 importPackage(Packages.il.ac.bgu.cs.bp.bpjs.model.eventsets);
 
-bp.log.setLevel("Fine");
-
 ///////////////////////////////////////////////////////////////
 // Robot status library
 /**
@@ -147,27 +145,24 @@ bp.registerBThread("regulator", function(){
 var ROVER_ROTATION_UNIT = 1;
 
 // Length of movement of the rover in a single step, with power=100.
-var ROVER_MAX_STEP = 6;
+var ROVER_MAX_STEP = 4;
 
 function parseExternalRoverEvent( rover, evt ) {
-  bp.log.info("Rover event:" + evt );
-  switch (evt.name) {
-    case StaticEvents.TURN_LEFT.name:
-      return statusRotate(rover, -ROVER_ROTATION_UNIT);
-      break;
-    case StaticEvents.TURN_RIGHT.name:
-      return statusRotate(rover, ROVER_ROTATION_UNIT);
-      break;
-    case StaticEvents.GO_TO_TARGET.name:
+  if ( evt.name == StaticEvents.TURN_LEFT.name ) {
+    return statusRotate(rover, -ROVER_ROTATION_UNIT);
+  } else if ( evt.name == StaticEvents.TURN_RIGHT.name ) {
+    return statusRotate(rover, ROVER_ROTATION_UNIT);
+  } else if ( evt.name == StaticEvents.GO_TO_TARGET.name ) {
+    return statusMove(rover, ROVER_MAX_STEP);
+  } else {
+    if ( evt.name.match(/^GoSlowGradient/) ) {
+      var amount = evt.power;
+      return statusMove(rover, (ROVER_MAX_STEP*amount/100));
+    } else if ( evt.name == "GoToTarget" ) {
       return statusMove(rover, ROVER_MAX_STEP);
-      break;
-    default:
-      if ( evt.name.match(/^GoSlowGradient/) ) {
-        var amount = evt.power;
-        bp.log.info(" ~ Move amount: " + amount);
-        return statusMove(rover, (ROVER_MAX_STEP*amount/100));
-      } else {
-        bp.warn.log("Unknown external event: " + evt.name);
-      }
+    } else {
+      bp.log.warn("Unknown external event: '" + evt.name + "'");
+      return rover;
+    }
   }
 }

@@ -29,7 +29,7 @@ public class ComplexEnvironmentVerification {
         
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
-        vfr.setMaxTraceLength(300);
+        vfr.setMaxTraceLength(500);
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
         vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(false) );
         
