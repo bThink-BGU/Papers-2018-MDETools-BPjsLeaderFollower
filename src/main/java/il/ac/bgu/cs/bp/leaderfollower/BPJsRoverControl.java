@@ -215,7 +215,7 @@ public class BPJsRoverControl {
 
         /**
          * Extracts The Data
-         * @param theGpsMessage message text form the GPS
+         * @param theGpsMessage message text form the GPS.
          */
         public ExtractedGpsData(String theGpsMessage) {
             String[] StringSplit;
