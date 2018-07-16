@@ -6,6 +6,7 @@ import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
+import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import il.ac.bgu.cs.bp.leaderfollower.events.GoSlowGradient;
 import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
 import il.ac.bgu.cs.bp.leaderfollower.events.Telemetry;
@@ -16,7 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import static java.lang.Math.*;
 import java.text.DecimalFormat;
 import java.time.Instant;
@@ -39,7 +39,7 @@ public class BPJsRoverControl {
     private static DriveCommands drive;
     public static String IP = "127.0.0.1";
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         
         System.out.println("Starting rover control program");
         int refPort = 0;
@@ -50,7 +50,7 @@ public class BPJsRoverControl {
 
         try {
             //------ Load config
-            java.util.List<String> conf = readResource("config.txt");
+            java.util.List<String> conf = Arrays.asList(readResource("config.txt").split("\n"));
             Iterator<String> conIt = conf.iterator();
             while (conIt.hasNext()) {
                 String a = conIt.next();
@@ -80,6 +80,8 @@ public class BPJsRoverControl {
         }
 
         BProgram bprog = new SingleResourceBProgram("ControllerLogic.js");
+        bprog.prependSource( readResource("CommonLib.js") );
+        
         bprog.setDaemonMode(true);
         BProgramRunner rnr = new BProgramRunner(bprog);
 
@@ -123,9 +125,6 @@ public class BPJsRoverControl {
                 }
                 if (theEvent instanceof GoSlowGradient) {
                     drive.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
-                }
-                if (theEvent.equals(StaticEvents.BREAK_ON)) {
-                    drive.brake(true);
                 }
                 if (theEvent.equals(StaticEvents.TICK)) {
                     Double distance, compassDeg, deg2Target;
@@ -173,23 +172,6 @@ public class BPJsRoverControl {
             robotControlPanel = new BPjsRoverControlPanel(bprog, rnr);
         });
         rnr.run();
-    }
-
-    public static List<String> readResource(String fileName) {
-        // this gives you a 2-dimensional array of strings
-        List<String> data = new ArrayList<>();
-
-        try (InputStream resource = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-             Scanner inputStream = new Scanner(resource)) {
-
-            while (inputStream.hasNext()) {
-                data.add(inputStream.next());
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return data;
     }
 
     // file read
