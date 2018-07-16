@@ -1,0 +1,135 @@
+
+# This trace shows that there's a problem in the logic: I was expecting the system
+# to allow both TurnX and GO_TO_TARGET. Turns out GO_TO_TARGET was blocked by another b-thread too. (lines 82-88)
+
+cd /Users/michael/Documents/PhD/Thesis/code/bThink-BGU/BPjsLeaderFollower; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home /Applications/NetBeans/netbeans/java/maven/bin/mvn "-Dexec.args=-classpath %classpath il.ac.bgu.cs.bp.leaderfollower.ModelChecking" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:1.5.0:exec
+Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
+Scanning for projects...
+
+------------------------------------------------------------------------
+Building BPjsLeaderFollower 0.5-DEV
+------------------------------------------------------------------------
+
+--- exec-maven-plugin:1.5.0:exec (default-cli) @ BPjsLeaderFollower ---
+/v/ verification of 'ControllerLogic.js' started
+[BP][Info] NOT FACING TARGET
+[BP][Info] instruction: TurnRight
+/v/ verification of ControllerLogic.js done
+Counter example found. Type: Deadlock
+null
+
+ GoToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ REQ_too close: r:[OrderedSet []]	w:[JsEventSet: telem-close]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:StartControl]]]	w:{none}	b:{none}
+[BEvent name:StartControl]
+
+ GoToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ REQ_too close: r:[OrderedSet []]	w:[JsEventSet: telem-close]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ GoToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ REQ_too close: r:[OrderedSet []]	w:[JsEventSet: telem-close]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Telemetry(10.0,10.0,10.0,12.0,0.0,2.0)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(10.0,10.0,10.0,12.0,0.0,2.0)]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[BEvent name:SpinDone]	b:[BEvent name:GoToTarget]
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ REQ_too close: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:SpinDone]]]	w:{none}	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:[BEvent name:Tick]
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:SpinDone]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(-100)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ REQ_too close: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:[BEvent name:Tick]
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:GoSlowGradient(-100)]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: not facing target]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Telemetry(10.0,10.0,23.0,10.0,0.0,13.0)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(10.0,10.0,23.0,10.0,0.0,13.0)]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[BEvent name:SpinDone]	b:[BEvent name:GoToTarget]
+ REQ_not facing: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:[BEvent name:Tick]
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:TurnRight]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[BEvent name:SpinDone]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[BEvent name:SpinDone]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Telemetry(10.0,10.0,10.0,23.0,0.0,13.0)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(10.0,10.0,10.0,23.0,0.0,13.0)]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[BEvent name:SpinDone]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet [[BEvent name:SpinDone]]]	w:{none}	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:[BEvent name:Tick]
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:SpinDone]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(25)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:[BEvent name:Tick]
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:GoSlowGradient(25)]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ environment: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ GoToTarget: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SuperStepper: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 2.273 s
+Finished at: 2018-07-15T10:18:13+03:00
+Final Memory: 7M/25M
+------------------------------------------------------------------------

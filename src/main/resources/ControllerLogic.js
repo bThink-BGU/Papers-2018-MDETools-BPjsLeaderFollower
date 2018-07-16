@@ -5,10 +5,6 @@
 /* global bp Packages importPackage Telemetry StaticEvents*/
 importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);
 
-var AnyTelemetry = bp.EventSet("Telemetries", function(e) {
-  return e instanceof Telemetry;
-});
-
 bp.registerBThread("GoToTarget", function() {
   while (true) {
     bp.sync({ waitFor: AnyTelemetry                });
@@ -71,9 +67,8 @@ bp.registerBThread("NotTooClose", function() {
 
 function compDegToTarget(xL, yL, xR, yR, CompassDeg) {
   var LRDeg = Math.atan2((yL - yR), (xL - xR));
-  var LRDeg = (LRDeg / Math.PI) * 180;
+  LRDeg = (LRDeg / Math.PI) * 180;
   var DDeg = (90 - CompassDeg) - LRDeg;
-
   if (Math.abs(DDeg) >= 360) {
     if (DDeg > 0) {
       DDeg = DDeg - 360;
