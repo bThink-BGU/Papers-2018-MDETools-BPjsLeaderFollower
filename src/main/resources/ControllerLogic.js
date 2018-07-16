@@ -26,13 +26,15 @@ bp.registerBThread("SpinToTarget", function() {
   while (true) {
     var et = bp.sync({ waitFor: AnyTelemetry });
     var degToTarget = compDegToTarget(et.LeadX, et.LeadY, et.RovX, et.RovY, et.Compass);
-    if (Math.abs(degToTarget) > 4) {
+    while (Math.abs(degToTarget) > 4) {
       // must correct rover orientation
       if (degToTarget > 0) {
         bp.sync({request: StaticEvents.TURN_RIGHT, block:esForwardEvents});
       } else {
         bp.sync({request: StaticEvents.TURN_LEFT, block:esForwardEvents});
       }
+      et = bp.sync({ waitFor: AnyTelemetry, block:esForwardEvents});
+      degToTarget = compDegToTarget(et.LeadX, et.LeadY, et.RovX, et.RovY, et.Compass);
     }
   }
 });
@@ -66,8 +68,9 @@ bp.registerBThread("NotTooClose", function() {
 
 function compDegToTarget(xL, yL, xR, yR, CompassDeg) {
   var LRDeg = Math.atan2((yL - yR), (xL - xR));
-  LRDeg = (LRDeg / Math.PI) * 180;
+  var LRDeg = (LRDeg / Math.PI) * 180;
   var DDeg = (90 - CompassDeg) - LRDeg;
+
   if (Math.abs(DDeg) >= 360) {
     if (DDeg > 0) {
       DDeg = DDeg - 360;
