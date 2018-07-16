@@ -16,8 +16,8 @@ var esForwardEvents = bp.EventSet("ForwardEvents", function(e){
 
 bp.registerBThread("Go", function() {
   while (true) {
-    bp.sync({ waitFor: AnyTelemetry                });
-    bp.sync({ request: StaticEvents.GO_TO_TARGET   });
+    bp.sync({ waitFor: AnyTelemetry              });
+    bp.sync({ request: StaticEvents.GO_TO_TARGET });
   }
 });
 

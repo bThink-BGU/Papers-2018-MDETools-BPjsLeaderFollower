@@ -1,0 +1,18 @@
+digraph leaderfollower {
+L0[pos="1.0,15.0!"]
+L1[pos="1.0,18.0!"]
+L2[pos="1.0,23.0!"]
+L0 -> L1
+L1 -> L2
+node [color=blue]
+edge [color=blue]
+R0[pos="1.0,1.0!"]
+R1[pos="1.0,4.6!"]
+R2[pos="1.0,6.76!"]
+R0 -> R1
+R1 -> R2
+edge [color=gray]
+R0->L0
+R1->L1
+R2->L2
+}

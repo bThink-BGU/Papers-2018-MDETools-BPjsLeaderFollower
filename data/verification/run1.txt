@@ -1,0 +1,135 @@
+cd /Users/michael/Documents/PhD/Thesis/code/bThink-BGU/BPjsLeaderFollower; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home /Applications/NetBeans/netbeans/java/maven/bin/mvn "-Dexec.args=-classpath %classpath il.ac.bgu.cs.bp.leaderfollower.ComplexEnvironmentVerification" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:1.5.0:exec
+Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
+Scanning for projects...
+                                                                        
+------------------------------------------------------------------------
+Building BPjsLeaderFollower 0.5-DEV
+------------------------------------------------------------------------
+
+--- exec-maven-plugin:1.5.0:exec (default-cli) @ BPjsLeaderFollower ---
+/v/ verification of 'ControllerLogic.js' started
+[BP][Info] Rover event:[BEvent name:GoSlowGradient(60)]
+[BP][Info]  ~ Move amount: 60
+[BP][Info] Rover event:[BEvent name:GoSlowGradient(36)]
+[BP][Info]  ~ Move amount: 36
+/v/ verification of ControllerLogic.js done
+States scanned: 10
+Time (msec): 1117
+Counter example found. Type: FailedAssertion
+Verification message: Follower too far from the leader (16.240000000000002)
+null
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet []]	w:[BEvent name:StartControl]	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet [[BEvent name:StartControl]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[BEvent name:StartControl]	b:{none}
+[BEvent name:StartControl]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: leaderEvents], [BEvent name:Tick]])
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(1.0,1.0,1.0,15.0,0.0,14.0)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(1.0,1.0,1.0,15.0,0.0,14.0)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(60)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: Telemetries], [BEvent name:Tick]])
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(60)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:anyOf([[JsEventSet: leaderEvents], [JsEventSet: Telemetries], [BEvent name:Tick]])
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoSlowGradient(60)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[BEvent name:Tick]	b:anyOf([[JsEventSet: leaderEvents], [JsEventSet: Telemetries], [JsEventSet: externalRoverEvents]])
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: leaderEvents], [BEvent name:Tick]])
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(1.0,4.6,1.0,18.0,0.0,13.4)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(1.0,4.6,1.0,18.0,0.0,13.4)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(36)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: Telemetries], [BEvent name:Tick]])
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(36)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:anyOf([[JsEventSet: leaderEvents], [JsEventSet: Telemetries], [BEvent name:Tick]])
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoSlowGradient(36)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[BEvent name:Tick]	b:anyOf([[JsEventSet: leaderEvents], [JsEventSet: Telemetries], [JsEventSet: externalRoverEvents]])
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ outOfRange: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: leaderEvents], [BEvent name:Tick]])
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(1.0,6.76,1.0,23.0,0.0,16.240000000000002)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(1.0,6.76,1.0,23.0,0.0,16.240000000000002)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader-acts: r:[OrderedSet [[BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]], [BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ length-limit: r:[OrderedSet []]	w:[BEvent name:Tick]	b:{none}
+ regulator: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:anyOf([[JsEventSet: externalRoverEvents], [JsEventSet: Telemetries], [BEvent name:Tick]])
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 2.115 s
+Finished at: 2018-07-16T13:51:24+03:00
+Final Memory: 7M/25M
+------------------------------------------------------------------------

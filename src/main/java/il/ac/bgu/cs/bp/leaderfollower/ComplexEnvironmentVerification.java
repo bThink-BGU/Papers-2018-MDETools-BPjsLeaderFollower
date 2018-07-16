@@ -7,25 +7,25 @@ import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
+import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import java.io.PrintStream;
-import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.*;
+
 /**
- * This class model-checks the rover control b-program.
- * 
+ *
  * @author michael
  */
-public class ModelChecking {
+public class ComplexEnvironmentVerification {
     
     public static void main(String[] args) throws Exception {
-        new ModelChecking().start();
+        new ComplexEnvironmentVerification().start();
     }
     
     public void start() throws Exception {
         // create the compound model
         BProgram model = new SingleResourceBProgram("ControllerLogic.js");
         model.prependSource( readResource("CommonLib.js") );
-        model.appendSource( readResource("SimpleSimulatedEnvironment.js") );
-        model.appendSource( readResource("ModelAssertions.js") );
+        model.appendSource( readResource("ComplexSimulatedEnvironment.js") );
+        model.appendSource( readResource("ComplexEnvironmentAssertions.js") );
         
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
@@ -33,18 +33,17 @@ public class ModelChecking {
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
         vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(false) );
         
-//        vfr.setDetectDeadlocks(false); // Should go away in next version
-        
         VerificationResult verificationResult = vfr.verify(model);
+        
+        System.out.println("States scanned: " + verificationResult.getScannedStatesCount() );
+        System.out.println("Time (msec): " + verificationResult.getTimeMillies());
         
         if ( verificationResult.isCounterExampleFound() ) {
             System.out.println("Counter example found. Type: " + verificationResult.getViolationType());
             if ( verificationResult.getFailedAssertion() != null ) {
                 System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
             }
-            
             verificationResult.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
-            
             
         } else {
             System.out.println("No counter example found.");
@@ -60,5 +59,4 @@ public class ModelChecking {
                 out.printf(" %s: r:%s\tw:%s\tb:%s\n", btss.getName(), btss.getBSyncStatement().getRequest(), btss.getBSyncStatement().getWaitFor(), btss.getBSyncStatement().getBlock());
             });
     }
-    
 }

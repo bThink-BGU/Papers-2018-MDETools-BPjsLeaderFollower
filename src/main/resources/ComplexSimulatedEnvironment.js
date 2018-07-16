@@ -114,7 +114,7 @@ bp.registerBThread("world-status", function(){
     // TICK
     bp.sync({request:StaticEvents.TICK});
 
-    bp.log.info("%% " + statusToString(rover) + "\t" + statusToString(leader) );
+    bp.log.fine("%% " + statusToString(rover) + "\t" + statusToString(leader) );
 
     // telemetry
     bp.sync({request:makeTelemetry(rover, leader)});
