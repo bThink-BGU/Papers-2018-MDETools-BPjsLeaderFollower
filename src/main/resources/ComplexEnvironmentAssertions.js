@@ -12,7 +12,7 @@ bp.registerBThread("outOfRange-range", function(){
   var distanceGrowthCount = 0;
   while (true) {
     var telem = bp.sync({waitFor:AnyTelemetry});
-    if ( telem.Dist > lastDistance ) {
+    if ( telem.Dist > lastDistance && telem.Dist > 15 ) {
       distanceGrowthCount++;
       bp.ASSERT( distanceGrowthCount<=10, "Distance grew for 10 consecutive telemetries.");
     } else {
