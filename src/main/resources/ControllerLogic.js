@@ -5,8 +5,8 @@
 /* global bp Packages importPackage Telemetry StaticEvents*/
 importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);
 
-var AnyTelemetry = bp.EventSet("Telemetries", function(e) {
-  return e instanceof Telemetry;
+var AnyTelemetry = bp.EventSet("Telemetries", function (e) {
+    return e instanceof Telemetry;
 });
 
 var FORWARD_EVENT_REGEX = /^(GoToTarget|GoSlowGradient)/
@@ -34,7 +34,6 @@ bp.registerBThread("SpinToTarget", function() {
       } else {
         bp.sync({request: StaticEvents.TURN_LEFT, block:esForwardEvents});
       }
-
     }
   }
 });
