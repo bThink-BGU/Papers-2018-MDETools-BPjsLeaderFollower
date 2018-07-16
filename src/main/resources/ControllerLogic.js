@@ -9,10 +9,14 @@ var AnyTelemetry = bp.EventSet("Telemetries", function(e) {
   return e instanceof Telemetry;
 });
 
-bp.registerBThread("GoToTarget", function() {
+var FORWARD_EVENT_REGEX = /^(GoToTarget|GoSlowGradient)/
+var esForwardEvents = bp.EventSet("ForwardEvents", function(e){
+  return (e.name.match(FORWARD_EVENT_REGEX)!==null)
+})
+
+bp.registerBThread("Go", function() {
   while (true) {
     bp.sync({ waitFor: AnyTelemetry                });
-    bp.sync({ waitFor: StaticEvents.ORIENTATION_OK });
     bp.sync({ request: StaticEvents.GO_TO_TARGET   });
   }
 });
@@ -26,14 +30,11 @@ bp.registerBThread("SpinToTarget", function() {
     if (Math.abs(degToTarget) > 4) {
       // must correct rover orientation
       if (degToTarget > 0) {
-        bp.sync({request: StaticEvents.TURN_RIGHT});
+        bp.sync({request: StaticEvents.TURN_RIGHT, block:esForwardEvents});
       } else {
-        bp.sync({request: StaticEvents.TURN_LEFT});
+        bp.sync({request: StaticEvents.TURN_LEFT, block:esForwardEvents});
       }
 
-    } else {
-      // Orientation is fine
-      bp.sync({request: StaticEvents.ORIENTATION_OK});
     }
   }
 });
@@ -45,12 +46,8 @@ bp.registerBThread("NotTooClose", function() {
   while (true) {
     var lastTelemetry = bp.sync({waitFor: AnyTelemetry});
     while (lastTelemetry.Dist < tooFar) {
-      bp.sync({
-        waitFor: StaticEvents.ORIENTATION_OK,
-        block: StaticEvents.GO_TO_TARGET
-      });
       if (lastTelemetry.Dist >= tooClose - (tooFar - tooClose)) {
-        slowDownPower = Math.round(((lastTelemetry.Dist - tooClose) / (tooFar - tooClose)) * 100);
+        var slowDownPower = Math.round(((lastTelemetry.Dist - tooClose) / (tooFar - tooClose)) * 100);
         bp.sync({
           request: GoSlowGradient(slowDownPower),
           block: StaticEvents.GO_TO_TARGET

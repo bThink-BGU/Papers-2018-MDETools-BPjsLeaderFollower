@@ -11,7 +11,6 @@ import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
 import il.ac.bgu.cs.bp.leaderfollower.events.Telemetry;
 import java.awt.Color;
 
-import java.io.File;
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
