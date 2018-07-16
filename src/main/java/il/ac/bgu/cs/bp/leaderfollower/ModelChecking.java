@@ -6,15 +6,9 @@ import il.ac.bgu.cs.bp.bpjs.analysis.Node;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.BThreadSyncSnapshot;
 import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.stream.Collectors;
-
+import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.*;
 /**
  * This class model-checks the rover control b-program.
  * 
@@ -30,8 +24,9 @@ public class ModelChecking {
     public void start() throws Exception {
         // create the compound model
         BProgram model = new SingleResourceBProgram("ControllerLogic.js");
-        model.prependSource( readResource("SimpleSimulatedEnvironment.js") );
-        model.prependSource( readResource("ModelAssertions.js") );
+        model.prependSource( readResource("CommonLib.js") );
+        model.appendSource( readResource("SimpleSimulatedEnvironment.js") );
+        model.appendSource( readResource("ModelAssertions.js") );
         
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
@@ -67,16 +62,4 @@ public class ModelChecking {
             });
     }
     
-    private String readResource( String resourceName ) throws IOException { 
-        try ( InputStream resource = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
-              BufferedReader rdr = new BufferedReader(new InputStreamReader(resource))) {
-            if (resource == null) {
-                throw new RuntimeException("Resource '" + resourceName + "' not found.");
-            }
-            return rdr.lines().collect( Collectors.joining("\n") );
-            
-        } catch (IOException ex) {
-            throw new RuntimeException("Error reading resource: '" + resourceName +"': " + ex.getMessage(), ex);
-        }
-    }
 }

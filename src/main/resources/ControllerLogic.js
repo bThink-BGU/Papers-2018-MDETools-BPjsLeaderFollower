@@ -66,9 +66,8 @@ bp.registerBThread("NotTooClose", function() {
 
 function compDegToTarget(xL, yL, xR, yR, CompassDeg) {
   var LRDeg = Math.atan2((yL - yR), (xL - xR));
-  var LRDeg = (LRDeg / Math.PI) * 180;
+  LRDeg = (LRDeg / Math.PI) * 180;
   var DDeg = (90 - CompassDeg) - LRDeg;
-
   if (Math.abs(DDeg) >= 360) {
     if (DDeg > 0) {
       DDeg = DDeg - 360;
