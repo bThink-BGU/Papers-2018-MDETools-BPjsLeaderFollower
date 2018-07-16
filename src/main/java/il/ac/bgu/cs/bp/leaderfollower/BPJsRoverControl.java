@@ -46,8 +46,8 @@ public class BPJsRoverControl {
         int refPort = 0;
         int roverPort = 0;
         int maxSteps = 310;
-        Double[] d2TAllTime = new Double[maxSteps + 1];
-        Double[] disAllTime = new Double[maxSteps + 1];
+        Double[] d2TAllTime = new Double[maxSteps];
+        Double[] disAllTime = new Double[maxSteps];
 
         try {
             //------ Load config
@@ -156,8 +156,8 @@ public class BPJsRoverControl {
                         System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
                         System.out.println("DistArray: " + Arrays.toString(disAllTime));
                         try {
-                            writeToFile("SimData5NDegN.csv", "DegToTarget: ", d2TAllTime);
-                            writeToFile("SimData5NDistN.csv", "DistanceToTarget: ", disAllTime);
+                            writeToFile("SimDataDeg.csv", "DegToTarget: ", d2TAllTime);
+                            writeToFile("SimDataDist.csv", "DistanceToTarget: ", disAllTime);
                             rover.close();
                             System.exit(0);
                         } catch (IOException ex) {
