@@ -37,7 +37,6 @@ bp.registerBThread("GoToTarget", function () {
     }
 });
 
-
 var tooClose = 12.5;
 var tooFar = 15;
 
