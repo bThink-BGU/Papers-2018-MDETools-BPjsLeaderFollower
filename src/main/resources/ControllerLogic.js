@@ -26,7 +26,6 @@ bp.registerBThread("SpinToTarget", function() {
   while (true) {
     var et = bp.sync({ waitFor: AnyTelemetry });
     var degToTarget = compDegToTarget(et.LeadX, et.LeadY, et.RovX, et.RovY, et.Compass);
-    bp.log.fine('Js-degToTarget:' + degToTarget);
     if (Math.abs(degToTarget) > 4) {
       // must correct rover orientation
       if (degToTarget > 0) {
