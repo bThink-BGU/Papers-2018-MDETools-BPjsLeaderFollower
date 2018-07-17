@@ -1,0 +1,949 @@
+cd /Users/michael/Documents/PhD/Thesis/code/bThink-BGU/BPjsLeaderFollower; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home /Applications/NetBeans/netbeans/java/maven/bin/mvn "-Dexec.args=-classpath %classpath il.ac.bgu.cs.bp.leaderfollower.SideBySideVerification" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:1.5.0:exec
+Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
+Scanning for projects...
+                                                                        
+------------------------------------------------------------------------
+Building BPjsLeaderFollower 0.5-DEV
+------------------------------------------------------------------------
+
+--- exec-maven-plugin:1.5.0:exec (default-cli) @ BPjsLeaderFollower ---
+/v/ verification of 'ControllerLogic-flawed.js' started
+/v/ verification of ControllerLogic-flawed.js done
+States scanned: 145
+Time (msec): 6241
+Counter example found. Type: FailedAssertion
+Verification message: Expected slowdown power is: 71, while the actual power was 32
+null
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet []]	w:[BEvent name:StartControl]	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:StartControl]]]	w:{none}	b:{none}
+[BEvent name:StartControl]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,10.0,0.0,14.142135623730951)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,10.0,0.0,14.142135623730951)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,11.0,1.0,14.866068747318506)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,11.0,1.0,14.866068747318506)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,12.0,2.0,15.620499351813308)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,12.0,2.0,15.620499351813308)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,13.0,3.0,16.401219466856727)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,13.0,3.0,16.401219466856727)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,14.0,4.0,17.204650534085253)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,14.0,4.0,17.204650534085253)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,15.0,5.0,18.027756377319946)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,15.0,5.0,18.027756377319946)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,16.0,6.0,18.867962264113206)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,16.0,6.0,18.867962264113206)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,17.0,7.0,19.72308292331602)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,17.0,7.0,19.72308292331602)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,18.0,8.0,20.591260281974)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,18.0,8.0,20.591260281974)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,19.0,9.0,21.470910553583888)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,19.0,9.0,21.470910553583888)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,20.0,10.0,22.360679774997898)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,20.0,10.0,22.360679774997898)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,21.0,11.0,23.259406699226016)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,21.0,11.0,23.259406699226016)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,22.0,12.0,24.166091947189145)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,22.0,12.0,24.166091947189145)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,23.0,13.0,25.079872407968907)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,23.0,13.0,25.079872407968907)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,24.0,14.0,26.0)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,24.0,14.0,26.0)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,25.0,15.0,26.92582403567252)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,25.0,15.0,26.92582403567252)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,26.0,16.0,27.85677655436824)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,26.0,16.0,27.85677655436824)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnRight]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnRight]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.0,0.0,10.0,27.0,17.0,28.792360097775937)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.0,0.0,10.0,27.0,17.0,28.792360097775937)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(66)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoSlowGradient(66)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(0.5788959753510188,1.8934834168068102,10.0,28.0,17.0,27.75441242670791)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(0.5788959753510188,1.8934834168068102,10.0,28.0,17.0,27.75441242670791)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(1.456011089519229,4.762397684695916,10.0,29.0,17.0,25.699437980182605)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(1.456011089519229,4.762397684695916,10.0,29.0,17.0,25.699437980182605)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(2.3331262036874394,7.631311952585023,10.0,30.0,17.0,23.646123546390218)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(2.3331262036874394,7.631311952585023,10.0,30.0,17.0,23.646123546390218)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(3.2102413178556497,10.50022622047413,10.0,31.0,17.0,21.594942648071353)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(3.2102413178556497,10.50022622047413,10.0,31.0,17.0,21.594942648071353)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(4.08735643202386,13.369140488363236,10.0,32.0,17.0,19.546566964668646)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(4.08735643202386,13.369140488363236,10.0,32.0,17.0,19.546566964668646)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(4.964471546192071,16.238054756252343,10.0,33.0,17.0,17.50198146392299)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(4.964471546192071,16.238054756252343,10.0,33.0,17.0,17.50198146392299)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(5.8415866603602815,19.10696902414145,10.0,34.0,17.0,15.462689712697976)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(5.8415866603602815,19.10696902414145,10.0,34.0,17.0,15.462689712697976)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoToTarget]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(6.718701774528492,21.975883292030556,10.0,35.0,17.0,13.431103233438842)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(6.718701774528492,21.975883292030556,10.0,35.0,17.0,13.431103233438842)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(37)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(37)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:GoSlowGradient(37)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,36.0,17.0,13.29556089609685)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,36.0,17.0,13.29556089609685)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnLeft]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnLeft]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnLeft]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,37.0,16.0,14.272251973655756)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,37.0,16.0,14.272251973655756)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnLeft]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:leader data:[object Object]]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet [[BEvent name:TurnLeft]]]	w:{none}	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: externalRoverEvents]	b:{none}
+[BEvent name:TurnLeft]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
+[BEvent name:Tick]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[JsEventSet: ForwardEvents]
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet [[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,38.0,15.0,15.251964242589267)]]]	w:{none}	b:{none}
+[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,38.0,15.0,15.251964242589267)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet [[BEvent name:GoSlowGradient(32)]]]	w:{none}	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: goSlowGradients]	b:{none}
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+[BEvent name:GoSlowGradient(32)]
+
+ Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
+ NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
+ leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
+ world-status: r:[OrderedSet []]	w:[JsEventSet: leaderEvents]	b:{none}
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 7.447 s
+Finished at: 2018-07-17T15:01:29+03:00
+Final Memory: 7M/25M
+------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
 // turn off specific JS warnings.
 /* global bp importPackage Packages */
-/* global esExternalRoverEvents */  // defined in ModelAssertions.js
+/* global esExternalRoverEvents */  // defined in CommonLib.js
 
 // Rhino import
 importPackage(Packages.il.ac.bgu.cs.bp.leaderfollower.events);

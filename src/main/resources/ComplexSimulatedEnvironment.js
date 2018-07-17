@@ -1,36 +1,6 @@
 // This is a complex environment with some basic physics simulation.
 importPackage(Packages.il.ac.bgu.cs.bp.bpjs.model.eventsets);
 
-///////////////////////////////////////////////////////////////
-// Robot status library
-/**
- * Generates a status of a robot in 2D space.
- * @param x X coordinate
- * @param y Y coordinate
- * @param a azimuth of robot heading, from North clockwise.
- */
-function statusCreate(x, y, a) {
-  return {x:x, y:y, azimuth:a};
-}
-
-function statusRotate( status, deg ) {
-  return statusCreate(status.x, status.y, status.azimuth + deg);
-}
-
-function statusMove(status, amt) {
-  var newX = status.x + Math.sin(Trigo.d2r(status.azimuth))*amt;
-  var newY = status.y + Math.cos(Trigo.d2r(status.azimuth))*amt;
-  return statusCreate(newX, newY, status.azimuth);
-}
-
-function statusToString( status ) {
-  return status.x + "\t" + status.y + "\t" + status.azimuth;
-}
-
-function statusPrint( status ){
-  print(statusToString(status));
-}
-
 //////////////////////////////////////////////////////////////
 // tests
 function sampleRun( stages ) {
@@ -42,17 +12,10 @@ function sampleRun( stages ) {
   }
 }
 
-function makeTelemetry(rover, leader) {
-  return Telemetry(rover.x, rover.y, leader.x, leader.y, rover.azimuth, Trigo.distance(rover,leader));
-}
-
 //////////////////////////////////////////////////////////////
 // b-threads
 var DONE = bp.Event("DONE");
-var ROUND_LIMIT = 100;
-var esLeader = bp.EventSet("leaderEvents", function(e){
-  return e.name=="leader";
-});
+var ROUND_LIMIT = 500;
 
 bp.registerBThread("length-limit", function(){
   for (var i=0; i<ROUND_LIMIT; i++ ) {
@@ -140,29 +103,3 @@ bp.registerBThread("regulator", function(){
       interrupt:DONE});
   }
 });
-
-// Rotation amount in a single step (degrees);
-var ROVER_ROTATION_UNIT = 1;
-
-// Length of movement of the rover in a single step, with power=100.
-var ROVER_MAX_STEP = 4;
-
-function parseExternalRoverEvent( rover, evt ) {
-  if ( evt.name == StaticEvents.TURN_LEFT.name ) {
-    return statusRotate(rover, -ROVER_ROTATION_UNIT);
-  } else if ( evt.name == StaticEvents.TURN_RIGHT.name ) {
-    return statusRotate(rover, ROVER_ROTATION_UNIT);
-  } else if ( evt.name == StaticEvents.GO_TO_TARGET.name ) {
-    return statusMove(rover, ROVER_MAX_STEP);
-  } else {
-    if ( evt.name.match(/^GoSlowGradient/) ) {
-      var amount = evt.power;
-      return statusMove(rover, (ROVER_MAX_STEP*amount/100));
-    } else if ( evt.name == "GoToTarget" ) {
-      return statusMove(rover, ROVER_MAX_STEP);
-    } else {
-      bp.log.warn("Unknown external event: '" + evt.name + "'");
-      return rover;
-    }
-  }
-}

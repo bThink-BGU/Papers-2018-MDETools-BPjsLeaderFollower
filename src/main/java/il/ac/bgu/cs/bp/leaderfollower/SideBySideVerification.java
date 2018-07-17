@@ -14,18 +14,17 @@ import java.io.PrintStream;
  *
  * @author michael
  */
-public class ComplexEnvironmentVerification {
+public class SideBySideVerification {
     
     public static void main(String[] args) throws Exception {
-        new ComplexEnvironmentVerification().start();
+        new SideBySideVerification().start();
     }
     
     public void start() throws Exception {
         // create the compound model
-        BProgram model = new SingleResourceBProgram("ControllerLogic.js");
+        BProgram model = new SingleResourceBProgram("ControllerLogic-flawed.js");
         model.prependSource( readResource("CommonLib.js") );
-        model.appendSource( readResource("ComplexSimulatedEnvironment.js") );
-        model.appendSource( readResource("ComplexEnvironmentAssertions.js") );
+        model.appendSource( readResource("SideBySideStartEnvironment.js") );
         
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
