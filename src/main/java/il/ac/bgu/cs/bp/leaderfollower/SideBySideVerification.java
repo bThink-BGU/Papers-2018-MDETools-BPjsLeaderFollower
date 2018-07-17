@@ -24,7 +24,7 @@ public class SideBySideVerification {
         // create the compound model
         BProgram model = new SingleResourceBProgram("ControllerLogic-flawed.js");
         model.prependSource( readResource("CommonLib.js") );
-        model.appendSource( readResource("SideBySideStartEnvironment.js") );
+        model.appendSource( readResource("StaleGoSlowEnvironment.js") );
         
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
