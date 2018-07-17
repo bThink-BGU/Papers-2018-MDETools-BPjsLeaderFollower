@@ -1,4 +1,4 @@
-cd /Users/michael/Documents/PhD/Thesis/code/bThink-BGU/BPjsLeaderFollower; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home /Applications/NetBeans/netbeans/java/maven/bin/mvn "-Dexec.args=-classpath %classpath il.ac.bgu.cs.bp.leaderfollower.SideBySideVerification" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:1.5.0:exec
+cd /Users/michael/Documents/PhD/Thesis/code/bThink-BGU/BPjsLeaderFollower; JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home /Applications/NetBeans/netbeans/java/maven/bin/mvn "-Dexec.args=-classpath %classpath il.ac.bgu.cs.bp.leaderfollower.StaleGoSlowVerification" -Dexec.executable=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java -Dexec.classpathScope=runtime org.codehaus.mojo:exec-maven-plugin:1.5.0:exec
 Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
 Scanning for projects...
                                                                         
@@ -10,7 +10,7 @@ Building BPjsLeaderFollower 0.5-DEV
 /v/ verification of 'ControllerLogic-flawed.js' started
 /v/ verification of ControllerLogic-flawed.js done
 States scanned: 145
-Time (msec): 6241
+Time (msec): 5457
 Counter example found. Type: FailedAssertion
 Verification message: Expected slowdown power is: 71, while the actual power was 32
 null
@@ -593,7 +593,7 @@ null
 
  Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
  NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
- ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
  world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
@@ -601,7 +601,7 @@ null
 
  Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
  NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
- ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
  world-status: r:[OrderedSet [[BEvent name:Telemetry(0.5788959753510188,1.8934834168068102,10.0,28.0,17.0,27.75441242670791)]]]	w:{none}	b:{none}
@@ -849,7 +849,7 @@ null
 
  Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
  NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
- ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
  world-status: r:[OrderedSet [[BEvent name:Tick]]]	w:{none}	b:{none}
@@ -857,7 +857,7 @@ null
 
  Go: r:[OrderedSet [[BEvent name:GoToTarget]]]	w:{none}	b:{none}
  NotTooClose: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
- ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:[BEvent name:GoToTarget]
+ ProperGradientPower: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  SpinToTarget: r:[OrderedSet []]	w:[JsEventSet: Telemetries]	b:{none}
  leader: r:[OrderedSet [[BEvent name:leader data:[object Object]]]]	w:{none}	b:{none}
  world-status: r:[OrderedSet [[BEvent name:Telemetry(7.04323436677073,23.037381571149524,10.0,36.0,17.0,13.29556089609685)]]]	w:{none}	b:{none}
@@ -943,7 +943,7 @@ null
 ------------------------------------------------------------------------
 BUILD SUCCESS
 ------------------------------------------------------------------------
-Total time: 7.447 s
-Finished at: 2018-07-17T15:01:29+03:00
+Total time: 6.611 s
+Finished at: 2018-07-17T15:13:52+03:00
 Final Memory: 7M/25M
 ------------------------------------------------------------------------

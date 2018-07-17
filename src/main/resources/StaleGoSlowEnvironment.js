@@ -26,7 +26,7 @@ bp.registerBThread("ProperGradientPower", function(){
       var goSlowGradientEvent = bp.sync({waitFor:AnyGoSlowGradient});
       bp.ASSERT( goSlowGradientEvent.power === slowDownPower,
                  "Expected slowdown power is: " + slowDownPower + ", while the actual power was " + goSlowGradientEvent.power );
-      lastTelemetry = bp.sync({waitFor: AnyTelemetry, block: StaticEvents.GO_TO_TARGET});
+      lastTelemetry = bp.sync({waitFor: AnyTelemetry});
     }
   }
 });

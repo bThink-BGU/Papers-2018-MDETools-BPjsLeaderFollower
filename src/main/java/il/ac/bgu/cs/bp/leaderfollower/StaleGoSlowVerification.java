@@ -14,10 +14,10 @@ import java.io.PrintStream;
  *
  * @author michael
  */
-public class SideBySideVerification {
+public class StaleGoSlowVerification {
     
     public static void main(String[] args) throws Exception {
-        new SideBySideVerification().start();
+        new StaleGoSlowVerification().start();
     }
     
     public void start() throws Exception {
