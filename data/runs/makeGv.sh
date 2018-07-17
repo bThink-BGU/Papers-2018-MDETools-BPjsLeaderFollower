@@ -29,7 +29,7 @@ object App {
 
     val fileName = args(0) + ".gv"
     val ps = new PrintStream( new FileOutputStream(fileName) );
-    ps.println("digraph leaderfolloer {")
+    ps.println("digraph leaderfollower {")
 
     printTrace("L", leader, ps)
     ps.println("node [color=blue]")
