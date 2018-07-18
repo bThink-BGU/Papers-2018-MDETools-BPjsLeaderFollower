@@ -19,7 +19,7 @@ This project contains a few executable classes:
 * `il.ac.bgu.cs.bp.leaderfollower.BPJsRoverControl`: Our implementation of the leader/follower challenge. Running this class opens an application that connects to the `UnityObserver.jar` application, and then displays a window allowing users to start the simulation.
 * `il.ac.bgu.cs.bp.leaderfollower.ComplexEnvironmentVerification`: Runs verification on the rover control logic. This verification checks that the distance between the follower and the leader is no larger than 15 units.
 * `il.ac.bgu.cs.bp.leaderfollower.SimpleModelChecking`: Verifies simple properties of the model, by pushing specific `Telemetry` events and expecting some response. This approach is close to unit testing, but it is resilient to indeterminism in the tested code.
-* `il.ac.bgu.cs.bp.leaderfollower.StaleGoSlowVerification`: Verifies an old version of the rover control model, and exposes a bug where a `GoSlowGradient` event with stale data is selected. The results of this verification can be seen [here](/data/stale-goslow).
+* `il.ac.bgu.cs.bp.leaderfollower.StaleGoSlowVerification`: Verifies an old version of the rover control model, and exposes a bug where a `GoSlowGradient` event with stale data is selected. The results of this verification can be seen [here](/data/).
 
 ## How to Run
 * From an IDE: select a main class to run (see above about which class).
