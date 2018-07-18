@@ -14,10 +14,10 @@ import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.*;
  * 
  * @author michael
  */
-public class ModelChecking {
+public class SimpleModelChecking {
     
     public static void main(String[] args) throws Exception {
-        new ModelChecking().start();
+        new SimpleModelChecking().start();
     }
     
     public void start() throws Exception {
