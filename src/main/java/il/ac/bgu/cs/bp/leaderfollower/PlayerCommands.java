@@ -16,6 +16,12 @@ public class PlayerCommands {
     System.out.println(playerName + ",moveForward(100)");
   }
 
+  public void parameterizedMove(int powerX, int powerZ, int spin) {
+    player.noReply(playerName + ",moveForward(" + powerX + ")");
+    player.noReply(playerName + ",moveRight(" + powerZ + ")");
+    player.noReply(playerName + ",spin(" + spin + ")");
+  }
+
   public void right() {
     player.noReply(playerName + ",moveRight(-100)");
     System.out.println(playerName + ",moveRight(-100)");
@@ -61,16 +67,16 @@ public class PlayerCommands {
     System.out.println(playerName + ",spin(0)");
   }
 
-  public ExtractedGpsData getPlayerGps() {
-    return new ExtractedGpsData(player.send(this.playerName + ",GPS()"));
+  public GpsData getPlayerGps() {
+    return new GpsData(player.send(this.playerName + ",GPS()"));
   }
 
-  public ExtractedGpsData getOpponentGps() {
-    return new ExtractedGpsData(player.send(this.opponentName + ",GPS()"));
+  public GpsData getOpponentGps() {
+    return new GpsData(player.send(this.opponentName + ",GPS()"));
   }
 
-  public ExtractedGpsData getBallGps() {
-    return new ExtractedGpsData(player.send("ball,GPS()"));
+  public GpsData getBallGps() {
+    return new GpsData(player.send("ball,GPS()"));
   }
 
   public Double getPlayerCompass() {
@@ -81,8 +87,9 @@ public class PlayerCommands {
     return extractData(player.send(this.opponentName + ",getCompass()"));
   }
 
-  public Double getDegreeToTarget(ExtractedGpsData target, ExtractedGpsData source, Double sourceDegree) {
-    return compDeg2Target(source.x, source.y, target.x, target.y, sourceDegree);
+  public Double getDegreeToTarget(GpsData target, GpsData source,
+      Double sourceDegree) {
+    return compDeg2Target(target.x, target.y, source.x, source.y, sourceDegree);
   }
 
   private static Double extractData(String TheDistanceMessage) {
@@ -94,12 +101,13 @@ public class PlayerCommands {
     return Double.parseDouble(StringofDistance);
   }
 
-  private static Double compDeg2Target(Double xL, Double yL, Double xR, Double yR, Double CompassDeg) {
+  private static Double compDeg2Target(Double xTarget, Double yTarget, Double xSource, Double ySource,
+      Double sourceDegree) {
     Double DDeg, LRDeg;
 
-    LRDeg = Math.atan2((yL - yR), (xL - xR));
+    LRDeg = Math.atan2((yTarget - ySource), (xTarget - xSource));
     LRDeg = (LRDeg / Math.PI) * 180;
-    DDeg = (90 - CompassDeg) - LRDeg;
+    DDeg = (90 - sourceDegree) - LRDeg;
     if (Math.abs(DDeg) >= 360) {
       if (DDeg > 0) {
         DDeg = DDeg - 360;
@@ -118,13 +126,19 @@ public class PlayerCommands {
     return DDeg;
   }
 
-  public static class ExtractedGpsData {
+  public static class GpsData {
     public final Double x;
     public final Double y;
+    public final Double z;
 
-    public ExtractedGpsData(double x, double y) {
+    public GpsData(double x, double z) {
+      this(x, 0, z);
+    }
+
+    public GpsData(double x, double y, double z) {
       this.x = x;
       this.y = y;
+      this.z = z;
     }
 
     /**
@@ -132,17 +146,23 @@ public class PlayerCommands {
      * 
      * @param theGpsMessage message text form the GPS.
      */
-    private ExtractedGpsData(String theGpsMessage) {
+    private GpsData(String theGpsMessage) {
       String[] StringSplit;
       String Stringofx;
-      String Stringofy;
+      String Stringofz;
 
       StringSplit = theGpsMessage.split(",");
       Stringofx = StringSplit[1];
-      Stringofy = StringSplit[2].subSequence(0, StringSplit[2].indexOf(";")).toString();
+      Stringofz = StringSplit[2].subSequence(0, StringSplit[2].indexOf(";")).toString();
 
       this.x = Double.parseDouble(Stringofx);
-      this.y = Double.parseDouble(Stringofy);
+      this.y = Double.valueOf(0);
+      this.z = Double.parseDouble(Stringofz);
+    }
+
+    @Override
+    public String toString() {
+      return this.x + "," + this.z;
     }
   }
 }

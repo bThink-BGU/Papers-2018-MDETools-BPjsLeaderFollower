@@ -1,12 +1,13 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
-import il.ac.bgu.cs.bp.bpjs.analysis.BProgramStateVisitedStateStore;
+import il.ac.bgu.cs.bp.bpjs.analysis.BThreadSnapshotVisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsBProgramVerifier;
-import il.ac.bgu.cs.bp.bpjs.analysis.Node;
+import il.ac.bgu.cs.bp.bpjs.analysis.DfsTraversalNode;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
+import il.ac.bgu.cs.bp.bpjs.analysis.violations.Violation;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
+import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import java.io.PrintStream;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.*;
 /**
@@ -22,7 +23,7 @@ public class SimpleModelChecking {
     
     public void start() throws Exception {
         // create the compound model
-        BProgram model = new SingleResourceBProgram("ControllerLogic.js");
+        BProgram model = new ResourceBProgram("ControllerLogic.js");
         model.prependSource( readResource("CommonLib.js") );
         model.appendSource( readResource("SimpleSimulatedEnvironment.js") );
         model.appendSource( readResource("ModelAssertions.js") );
@@ -31,27 +32,26 @@ public class SimpleModelChecking {
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
         vfr.setMaxTraceLength(300);
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
-        vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(false) );
+        vfr.setVisitedNodeStore( new BThreadSnapshotVisitedStateStore() );
         
 //        vfr.setDetectDeadlocks(false); // Should go away in next version
         
         VerificationResult verificationResult = vfr.verify(model);
         
-        if ( verificationResult.isCounterExampleFound() ) {
-            System.out.println("Counter example found. Type: " + verificationResult.getViolationType());
-            if ( verificationResult.getFailedAssertion() != null ) {
-                System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
-            }
+        if ( verificationResult.isViolationFound() ) {
+            Violation v = verificationResult.getViolation().get();
+            // System.out.println("Counter example found. Type: " + v.getViolationType());
+            // if ( v.getFailedAssertion() != null ) {
+                // System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
+            // }
             
-            verificationResult.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
-            
-            
+            v.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
         } else {
             System.out.println("No counter example found.");
         }
     }
     
-    private void prettyPrintNode( Node n, PrintStream out ) {
+    private void prettyPrintNode( DfsTraversalNode n, PrintStream out ) {
         out.println( n.getLastEvent() );
         out.println();
         n.getSystemState().getBThreadSnapshots().stream()

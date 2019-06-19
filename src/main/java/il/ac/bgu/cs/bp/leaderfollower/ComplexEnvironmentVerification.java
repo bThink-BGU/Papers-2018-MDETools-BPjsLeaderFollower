@@ -1,8 +1,11 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
+import il.ac.bgu.cs.bp.bpjs.analysis.BThreadSnapshotVisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsBProgramVerifier;
+import il.ac.bgu.cs.bp.bpjs.analysis.DfsTraversalNode;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
+import il.ac.bgu.cs.bp.bpjs.analysis.violations.Violation;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
@@ -29,26 +32,27 @@ public class ComplexEnvironmentVerification {
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
         vfr.setMaxTraceLength(500);
         vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
-        vfr.setVisitedNodeStore( new BProgramStateVisitedStateStore(true) );
+        vfr.setVisitedNodeStore( new BThreadSnapshotVisitedStateStore() );
         
         VerificationResult verificationResult = vfr.verify(model);
         
         System.out.println("States scanned: " + verificationResult.getScannedStatesCount() );
         System.out.println("Time (msec): " + verificationResult.getTimeMillies());
         
-        if ( verificationResult.isCounterExampleFound() ) {
-            System.out.println("Counter example found. Type: " + verificationResult.getViolationType());
-            if ( verificationResult.getFailedAssertion() != null ) {
-                System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
-            }
-            verificationResult.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
+        if ( verificationResult.isViolationFound() ) {
+            Violation v = verificationResult.getViolation().get();
+            // System.out.println("Counter example found. Type: " + v.getViolationType());
+            // if ( v.getFailedAssertion() != null ) {
+                // System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
+            // }
             
+            v.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
         } else {
             System.out.println("No counter example found.");
         }
     }
     
-    private void prettyPrintNode( Node n, PrintStream out ) {
+    private void prettyPrintNode( DfsTraversalNode n, PrintStream out ) {
         out.println( n.getLastEvent() );
         out.println();
         n.getSystemState().getBThreadSnapshots().stream()

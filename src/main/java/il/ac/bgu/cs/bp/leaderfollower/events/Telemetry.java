@@ -1,6 +1,7 @@
 package il.ac.bgu.cs.bp.leaderfollower.events;
 
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
+import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
 import java.util.Objects;
 
 /**
@@ -8,37 +9,26 @@ import java.util.Objects;
  */
 @SuppressWarnings("serial")
 public class Telemetry extends BEvent implements java.io.Serializable {
+    public final GpsData BallGps;
+    public final GpsData PlayerGps;
+    public final GpsData OpponentGps;
+    public final Double PlayerCompass;
 
-    /**
-     * The Telemetry
-     */
-    public Double PlayerX;
-
-    public Double PlayerY;
-
-    public Double OpponentX;
-
-    public Double OpponentY;
-
-    public Double PlayerCompass;
-    
-    public Double PlayerDistanceToBall;
-
-    public Telemetry(Double PlayerX, Double PlayerY, Double OpponentX, Double OpponentY, Double PlayerCompass, Double PlayerDistanceToBall) {
-        super("Telemetry(" + PlayerX + "," + PlayerY + "," + OpponentX + "," + OpponentY + "," + PlayerCompass + "," + PlayerDistanceToBall + ")");
-        this.PlayerX = PlayerX;
-        this.PlayerY = PlayerY;
-        this.OpponentX = OpponentX;
-        this.OpponentY = OpponentY;
+    public Telemetry(GpsData BallGps, GpsData PlayerGps, GpsData OpponentGps,
+            Double PlayerCompass) {
+        super("Telemetry(" + BallGps + "," + PlayerGps + "," + OpponentGps + "," + PlayerCompass
+                + ")");
+        this.BallGps = BallGps;
+        this.PlayerGps = PlayerGps;
+        this.OpponentGps = OpponentGps;
         this.PlayerCompass = PlayerCompass;
-        this.PlayerDistanceToBall = PlayerDistanceToBall;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.PlayerX);
-        hash = 31 * hash + Objects.hashCode(this.OpponentX);
+        hash = 31 * hash + Objects.hashCode(this.PlayerGps);
+        hash = 31 * hash + Objects.hashCode(this.OpponentGps);
         hash = 31 * hash + Objects.hashCode(this.PlayerCompass);
         return hash;
     }
@@ -55,26 +45,17 @@ public class Telemetry extends BEvent implements java.io.Serializable {
             return false;
         }
         final Telemetry other = (Telemetry) obj;
-        if (!Objects.equals(this.PlayerX, other.PlayerX)) {
+        if (!Objects.equals(this.PlayerGps, other.PlayerGps)) {
             return false;
         }
-        if (!Objects.equals(this.PlayerY, other.PlayerY)) {
-            return false;
-        }
-        if (!Objects.equals(this.OpponentX, other.OpponentX)) {
-            return false;
-        }
-        if (!Objects.equals(this.OpponentY, other.OpponentY)) {
+        if (!Objects.equals(this.OpponentGps, other.OpponentGps)) {
             return false;
         }
         if (!Objects.equals(this.PlayerCompass, other.PlayerCompass)) {
             return false;
         }
-        if (!Objects.equals(this.PlayerDistanceToBall, other.PlayerDistanceToBall)) {
-            return false;
-        }
         return true;
     }
-    
-    
+
+
 }

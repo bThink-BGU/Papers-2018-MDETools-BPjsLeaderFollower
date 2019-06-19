@@ -3,7 +3,7 @@ package il.ac.bgu.cs.bp.leaderfollower;
 import il.ac.bgu.cs.bp.bpjs.execution.BProgramRunner;
 import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
+import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class RunComplexEnvironment {
     }
     
     public void start() throws IOException {
-        BProgram model = new SingleResourceBProgram("ControllerLogic.js");
+        BProgram model = new ResourceBProgram("ControllerLogic.js");
         model.prependSource( readResource("CommonLib.js") );
         model.prependSource("bp.log.setLevel(\"Fine\");");
         model.appendSource( readResource("ComplexSimulatedEnvironment.js") );

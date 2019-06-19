@@ -7,8 +7,8 @@ import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
-import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.ExtractedGpsData;
-import il.ac.bgu.cs.bp.leaderfollower.events.GoSlowGradient;
+import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
+import il.ac.bgu.cs.bp.leaderfollower.events.ParameterizedMove;
 import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
 import il.ac.bgu.cs.bp.leaderfollower.events.Telemetry;
 import java.awt.Color;
@@ -47,8 +47,8 @@ public class BPJsRoverControl {
     String ip = "127.0.0.1";
     String playerName = "player";
     String opponentPlayerName = "player";
-    ExtractedGpsData playerGate;
-    ExtractedGpsData opponentGate;
+    GpsData playerGate;
+    GpsData opponentGate;
 
     try {
       if (args.length == 1) {
@@ -57,13 +57,13 @@ public class BPJsRoverControl {
       if (playerId == 1) {
         playerName += playerId;
         opponentPlayerName += 3;
-        playerGate = new ExtractedGpsData(0, 50);
-        opponentGate = new ExtractedGpsData(0, -50);
+        playerGate = new GpsData(0, 50);
+        opponentGate = new GpsData(0, -50);
       } else {
         playerName += 3;
         opponentPlayerName += playerId;
-        playerGate = new ExtractedGpsData(0, -50);
-        opponentGate = new ExtractedGpsData(0, 50);
+        playerGate = new GpsData(0, -50);
+        opponentGate = new GpsData(0, 50);
       }
       playerName += (playerId == 1 ? playerId : 3);
       opponentPlayerName += (playerId == 1 ? 3 : playerId);
@@ -129,49 +129,56 @@ public class BPJsRoverControl {
             }
           });
           tmrThread.start();
-        }
-
-        if (theEvent.equals(StaticEvents.TURN_LEFT)) {
-          player.left();
-        }
-        if (theEvent.equals(StaticEvents.TURN_RIGHT)) {
+        } else if (theEvent.equals(StaticEvents.TURN_LEFT)) {
+          player.spinL();
+        } else if (theEvent.equals(StaticEvents.TURN_RIGHT)) {
+          player.spinR();
+        } else if (theEvent.equals(StaticEvents.STOP_TURNING)) {
+          player.spinStop();
+        } else if (theEvent.equals(StaticEvents.FORWARD)) {
+          player.forward();
+        } else if (theEvent.equals(StaticEvents.BACKWARD)) {
+          player.backward();
+        } else if (theEvent.equals(StaticEvents.RIGHT)) {
           player.right();
-        }
-        if (theEvent.equals(StaticEvents.GO_TO_TARGET)) {
-          player.go();
-        }
-        if (theEvent instanceof GoSlowGradient) {
-          player.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
+        } else if (theEvent.equals(StaticEvents.LEFT)) {
+          player.left();
+        } else if (theEvent.equals(StaticEvents.STOP_MOVEING)) {
+          player.stop();
+        } else if (theEvent.equals(StaticEvents.SUCK)) {
+          player.suck();
+        } else if (theEvent.equals(StaticEvents.EXPEL)) {
+          player.expel();
+        } else if (theEvent instanceof ParameterizedMove) {
+          ParameterizedMove move = (ParameterizedMove) theEvent;
+          player.parameterizedMove(move.powerX, move.powerZ, move.spin);
         }
         if (theEvent.equals(StaticEvents.TICK)) {
           Double playerDistanceToBall, opponentDistanceToBall, playerCompassDeg, opponentCompassDeg,
               degreeToBall, degreeToGate;
-          ExtractedGpsData playerGpsData = player.getPlayerGps();
-          ExtractedGpsData opponentGpsData = player.getOpponentGps();
-          ExtractedGpsData ballGpsData = player.getBallGps();
+          GpsData playerGpsData = player.getPlayerGps();
+          GpsData opponentGpsData = player.getOpponentGps();
+          GpsData ballGpsData = player.getBallGps();
           playerCompassDeg = player.getPlayerCompass();
           opponentCompassDeg = player.getOpponentCompass();
           degreeToBall = player.getDegreeToTarget(ballGpsData, playerGpsData, playerCompassDeg);
-          degreeToGate = player.getDegreeToTarget(playerGate, playerGpsData, playerCompassDeg);
+          degreeToGate = player.getDegreeToTarget(playerGpsData, playerGpsData, playerCompassDeg);
 
           SwingUtilities.invokeLater(() -> {
             robotControlPanel.PlayerGpsY_Text.setText(fmt.format(playerGpsData.y));
             robotControlPanel.PlayerGpsX_Text.setText(fmt.format(playerGpsData.x));
             robotControlPanel.OpponentGpsY_Text.setText(fmt.format(opponentGpsData.y));
             robotControlPanel.OpponentGpsX_Text.setText(fmt.format(opponentGpsData.x));
-            robotControlPanel.Distance2Ball_Text.setText(fmt.format(playerDistanceToBall));
-            robotControlPanel.Distance2Ball_Text.setBackground(
-                (playerDistanceToBall < 12 || playerDistanceToBall > 15) ? Color.RED : Color.GREEN);
             robotControlPanel.Deg2Ball_Text.setText(fmt.format(degreeToBall));
             robotControlPanel.Deg2Gate_Text.setText(fmt.format(degreeToGate));
           });
 
-          bp.enqueueExternalEvent(new Telemetry(playerGpsData.x, playerGpsData.y, opponentGpsData.x,
-              opponentGpsData.y, playerCompassDeg, playerDistanceToBall));
+          bp.enqueueExternalEvent(
+              new Telemetry(ballGpsData, playerGpsData, opponentGpsData, playerCompassDeg));
           if (stepCount < maxSteps) {
             System.out.println(stepCount);
             d2TAllTime[stepCount] = degreeToBall;
-            disAllTime[stepCount] = playerDistanceToBall;
+            // disAllTime[stepCount] = playerDistanceToBall;
 
           } else if (stepCount == maxSteps) {
             System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));

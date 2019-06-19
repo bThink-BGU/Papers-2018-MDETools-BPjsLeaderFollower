@@ -8,20 +8,20 @@
  */
 var EXTERNAL_ROVER_EVENT_NAME_FILTER = /^(GoSlow|Turn|Stop|GoToTarget)/
 
-var esExternalRoverEvents = bp.EventSet("externalRoverEvents", function(e){
+var esExternalRoverEvents = bp.EventSet("externalRoverEvents", function (e) {
   return (e.name.match(EXTERNAL_ROVER_EVENT_NAME_FILTER) !== null);
 });
 
 var AnyTelemetry = bp.EventSet("telemetries", function (e) {
-    return e instanceof Telemetry;
+  return e instanceof Telemetry;
 });
 
-var AnyGoSlowGradient = bp.EventSet("goSlowGradients", function (e) {
-    return e instanceof GoSlowGradient;
+var AnyGoSlowGradient = bp.EventSet("ParameterizedMoves", function (e) {
+  return e instanceof ParameterizedMove;
 });
 
-var esLeader = bp.EventSet("leaderEvents", function(e){
-  return e.name=="leader";
+var esLeader = bp.EventSet("opponentEvents", function (e) {
+  return e.name == "opponent";
 });
 
 ////
@@ -29,14 +29,14 @@ var esLeader = bp.EventSet("leaderEvents", function(e){
 
 var Trigo = {
   // Degrees to radians.
-  d2r:function( d ){
-     return (d*Math.PI*2)/360;
+  d2r: function (d) {
+    return (d * Math.PI * 2) / 360;
   },
 
-  distance:function(pA, pB) {
-    var dx = Math.abs(pA.x-pB.x);
-    var dy = Math.abs(pA.y-pB.y);
-    return Math.sqrt( Math.pow(dx,2) + Math.pow(dy,2) );
+  distance: function (pA, pB) {
+    var dx = Math.abs(pA.x - pB.x);
+    var dz = Math.abs(pA.z - pB.z);
+    return Math.sqrt(Math.pow(dx, 2) + Math.pow(dz, 2));
   }
 }
 
@@ -46,60 +46,63 @@ var Trigo = {
 /**
  * Generates a status of a robot in 2D space.
  * @param x X coordinate
- * @param y Y coordinate
+ * @param z Z coordinate
  * @param a azimuth of robot heading, from North clockwise.
  */
-function statusCreate(x, y, a) {
-  return {x:x, y:y, azimuth:a};
+function statusCreate(x, z, a) {
+  return { x: x, z: z, azimuth: a };
 }
 
-function statusRotate( status, deg ) {
-  return statusCreate(status.x, status.y, status.azimuth + deg);
+function statusRotate(status, deg) {
+  return statusCreate(status.x, status.z, status.azimuth + deg);
 }
 
 function statusMove(status, amt) {
-  var newX = status.x + Math.sin(Trigo.d2r(status.azimuth))*amt;
-  var newY = status.y + Math.cos(Trigo.d2r(status.azimuth))*amt;
-  return statusCreate(newX, newY, status.azimuth);
+  var newX = status.x + Math.sin(Trigo.d2r(status.azimuth)) * amt;
+  var newZ = status.z + Math.cos(Trigo.d2r(status.azimuth)) * amt;
+  return statusCreate(newX, newZ, status.azimuth);
 }
 
-function statusToString( status ) {
-  return status.x + "\t" + status.y + "\t" + status.azimuth;
+function statusToString(status) {
+  return status.x + "\t" + status.z + "\t" + status.azimuth;
 }
 
-function statusPrint( status ){
+function statusPrint(status) {
   print(statusToString(status));
 }
 //
 ////////////////////////////////////
 
-function makeTelemetry(follower, leader) {
-  return Telemetry(follower.x, follower.y, leader.x, leader.y, follower.azimuth, Trigo.distance(follower,leader));
+function makeTelemetry(player, opponent) {
+  return Telemetry(player, opponent, player.azimuth);
 }
 
-
 // Rotation amount in a single step (degrees);
-var ROVER_ROTATION_UNIT = 1;
+var PLAYER_ROTATION_UNIT = 1;
 
 // Length of movement of the rover in a single step, with power=100.
-var ROVER_MAX_STEP = 3;
+var PLAYER_MAX_STEP = 3;
 
-function parseExternalRoverEvent( rover, evt ) {
-  if ( evt.name == StaticEvents.TURN_LEFT.name ) {
-    return statusRotate(rover, -ROVER_ROTATION_UNIT);
-  } else if ( evt.name == StaticEvents.TURN_RIGHT.name ) {
-    return statusRotate(rover, ROVER_ROTATION_UNIT);
-  } else if ( evt.name == StaticEvents.GO_TO_TARGET.name ) {
-    return statusMove(rover, ROVER_MAX_STEP);
+function parseExternalRoverEvent(player, evt) {
+  if (evt.name == StaticEvents.TURN_LEFT.name) {
+    return statusRotate(player, -PLAYER_ROTATION_UNIT);
+  } else if (evt.name == StaticEvents.TURN_RIGHT.name) {
+    return statusRotate(player, PLAYER_ROTATION_UNIT);
+  } else if (evt.name == StaticEvents.MOVE_FORWARD.name) {
+    return statusMove(player, PLAYER_MAX_STEP);
+  } else if (evt.name == StaticEvents.MOVE_BACKWORD.name) {
+    return statusMove(player, -PLAYER_MAX_STEP);
+  } else if (evt.name == StaticEvents.MOVE_RIGHT.name) {
+    return statusMove(player, PLAYER_MAX_STEP);
+  } else if (evt.name == StaticEvents.MOVE_LEFT.name) {
+    return statusMove(player, PLAYER_MAX_STEP);
+  } else if (evt.name.match(/^ParameterizedMoves/)) {
+    var amountX = evt.powerX;
+    var amountZ = evt.powerZ;
+    var spint = evt.spin;
+    return statusMove(player, (PLAYER_MAX_STEP * amount / 100));
   } else {
-    if ( evt.name.match(/^GoSlowGradient/) ) {
-      var amount = evt.power;
-      return statusMove(rover, (ROVER_MAX_STEP*amount/100));
-    } else if ( evt.name == "GoToTarget" ) {
-      return statusMove(rover, ROVER_MAX_STEP);
-    } else {
-      bp.log.warn("Unknown external event: '" + evt.name + "'");
-      return rover;
-    }
+    bp.log.warn("Unknown external event: '" + evt.name + "'");
+    return player;
   }
 }

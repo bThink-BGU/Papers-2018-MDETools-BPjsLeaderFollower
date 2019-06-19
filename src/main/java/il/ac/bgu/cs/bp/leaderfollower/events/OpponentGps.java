@@ -1,23 +1,15 @@
 package il.ac.bgu.cs.bp.leaderfollower.events;
 
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
+import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
 
 
 @SuppressWarnings("serial")
 public class OpponentGps extends BEvent {
+	public final GpsData gpsData;
 
-	/**
-	 * The Leader GPS Data
-	 */
-	public Double OpponentGpsX;
-
-	public Double OpponentGpsY;
-
-
-	public OpponentGps(Double OpponentGpsX, Double OpponentGpsY) {
-		super("LeaderGPS(" + OpponentGpsX + "," + OpponentGpsY + ")");
-		this.OpponentGpsX = OpponentGpsX;
-		this.OpponentGpsX = OpponentGpsX;
+	public OpponentGps(GpsData gpsData) {
+		super("OpponentGPS(" + gpsData + ")");
+		this.gpsData = gpsData;
 	}
-
 }
