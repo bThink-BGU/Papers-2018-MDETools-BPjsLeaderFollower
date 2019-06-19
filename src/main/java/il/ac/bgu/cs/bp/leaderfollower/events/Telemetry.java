@@ -13,15 +13,17 @@ public class Telemetry extends BEvent implements java.io.Serializable {
     public final GpsData PlayerGps;
     public final GpsData OpponentGps;
     public final Double PlayerCompass;
+    public final Double DistancePlayerToBall;
 
     public Telemetry(GpsData BallGps, GpsData PlayerGps, GpsData OpponentGps,
-            Double PlayerCompass) {
+            Double PlayerCompass, Double DistancePlayerToBall) {
         super("Telemetry(" + BallGps + "," + PlayerGps + "," + OpponentGps + "," + PlayerCompass
-                + ")");
+                + ","+DistancePlayerToBall+")");
         this.BallGps = BallGps;
         this.PlayerGps = PlayerGps;
         this.OpponentGps = OpponentGps;
         this.PlayerCompass = PlayerCompass;
+        this.DistancePlayerToBall = DistancePlayerToBall;
     }
 
     @Override

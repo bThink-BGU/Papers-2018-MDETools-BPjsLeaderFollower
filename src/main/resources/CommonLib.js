@@ -74,7 +74,7 @@ function statusPrint(status) {
 ////////////////////////////////////
 
 function makeTelemetry(player, opponent) {
-  return Telemetry(player, opponent, player.azimuth);
+  return Telemetry(player, opponent, player.azimuth, Trigo.distance(player, opponent));
 }
 
 // Rotation amount in a single step (degrees);

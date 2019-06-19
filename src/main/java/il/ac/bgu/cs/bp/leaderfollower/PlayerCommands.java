@@ -87,9 +87,14 @@ public class PlayerCommands {
     return extractData(player.send(this.opponentName + ",getCompass()"));
   }
 
-  public Double getDegreeToTarget(GpsData target, GpsData source,
-      Double sourceDegree) {
+  public Double getDegreeToTarget(GpsData target, GpsData source, Double sourceDegree) {
     return compDeg2Target(target.x, target.y, source.x, source.y, sourceDegree);
+  }
+
+  public Double getDistance(GpsData pA, GpsData pB) {
+    double dx = Math.abs(pA.x - pB.x);
+    double dz = Math.abs(pA.z - pB.z);
+    return Math.sqrt(Math.pow(dx, 2) + Math.pow(dz, 2));
   }
 
   private static Double extractData(String TheDistanceMessage) {
@@ -101,8 +106,8 @@ public class PlayerCommands {
     return Double.parseDouble(StringofDistance);
   }
 
-  private static Double compDeg2Target(Double xTarget, Double yTarget, Double xSource, Double ySource,
-      Double sourceDegree) {
+  private static Double compDeg2Target(Double xTarget, Double yTarget, Double xSource,
+      Double ySource, Double sourceDegree) {
     Double DDeg, LRDeg;
 
     LRDeg = Math.atan2((yTarget - ySource), (xTarget - xSource));

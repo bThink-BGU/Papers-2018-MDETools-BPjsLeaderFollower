@@ -42,14 +42,14 @@ var tooFar = 15;
 bp.registerBThread("NotTooClose", function () {
   while (true) {
     var lastTelemetry = bp.sync({ waitFor: AnyTelemetry });
-    while (lastTelemetry.Dist < tooFar) {
-      if (lastTelemetry.Dist >= tooClose - (tooFar - tooClose)) {
+    while (lastTelemetry.DistancePlayerToBall < tooFar) {
+      if (lastTelemetry.DistancePlayerToBall >= tooClose - (tooFar - tooClose)) {
         var slowDownPower = Math.round(((lastTelemetry.Dist - tooClose) / (tooFar - tooClose)) * 100);
-        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: GoSlowGradient(slowDownPower), block: StaticEvents.GO_TO_TARGET });
+        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(slowDownPower,0,0), block: StaticEvents.MOVE_FORWARD });
       } else {
-        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: GoSlowGradient(-100), block: StaticEvents.GO_TO_TARGET });
+        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(-100,0,0), block: StaticEvents.MOVE_FORWARD });
       }
-      lastTelemetry = bp.sync({ waitFor: AnyTelemetry, block: StaticEvents.GO_TO_TARGET });
+      lastTelemetry = bp.sync({ waitFor: AnyTelemetry, block: StaticEvents.MOVE_FORWARD });
     }
   }
 });

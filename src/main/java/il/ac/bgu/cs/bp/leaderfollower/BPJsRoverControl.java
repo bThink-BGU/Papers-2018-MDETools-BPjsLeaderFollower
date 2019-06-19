@@ -163,6 +163,7 @@ public class BPJsRoverControl {
           opponentCompassDeg = player.getOpponentCompass();
           degreeToBall = player.getDegreeToTarget(ballGpsData, playerGpsData, playerCompassDeg);
           degreeToGate = player.getDegreeToTarget(playerGpsData, playerGpsData, playerCompassDeg);
+          playerDistanceToBall = player.getDistance(playerGpsData, ballGpsData);
 
           SwingUtilities.invokeLater(() -> {
             robotControlPanel.PlayerGpsY_Text.setText(fmt.format(playerGpsData.y));
@@ -174,11 +175,11 @@ public class BPJsRoverControl {
           });
 
           bp.enqueueExternalEvent(
-              new Telemetry(ballGpsData, playerGpsData, opponentGpsData, playerCompassDeg));
+              new Telemetry(ballGpsData, playerGpsData, opponentGpsData, playerCompassDeg, playerDistanceToBall));
           if (stepCount < maxSteps) {
             System.out.println(stepCount);
             d2TAllTime[stepCount] = degreeToBall;
-            // disAllTime[stepCount] = playerDistanceToBall;
+            disAllTime[stepCount] = playerDistanceToBall;
 
           } else if (stepCount == maxSteps) {
             System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
