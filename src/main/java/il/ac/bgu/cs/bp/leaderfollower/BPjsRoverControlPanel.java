@@ -39,21 +39,23 @@ public class BPjsRoverControlPanel {
 
     JPanel ButtonsPanel;
     JPanel MainPanel;
-    public JLabel MainTitle = new JLabel("RoverControl");
+    public JLabel MainTitle = new JLabel("GameControl");
     JPanel TelemPanel;
-    public JLabel RoverGPSX_Lable = new JLabel("Rover Gps X:        ");
-    public JLabel RoverGPSY_Lable = new JLabel("Rover Gps Y:        ");
-    public JLabel LeaderGPSX_Lable = new JLabel("Leader Gps X:        ");
-    public JLabel LeaderGPSY_Lable = new JLabel("Leader Gps Y:        ");
-    public JLabel Distance_Lable = new JLabel("Distance:        ");
-    public JLabel Deg2Target_Lable = new JLabel("Deg2Target:        ");
+    public JLabel PlayerGpsX_Lable = new JLabel("Player Gps X:        ");
+    public JLabel PlayerGpsY_Lable = new JLabel("Player Gps Y:        ");
+    public JLabel OpponentGpsX_Lable = new JLabel("Opponent Gps X:        ");
+    public JLabel OpponentGpsY_Lable = new JLabel("Opponent Gps Y:        ");
+    public JLabel Distance2Ball_Lable = new JLabel("Distance To Ball:        ");
+    public JLabel Deg2Ball_Lable = new JLabel("Degree 2 Ball:        ");
+    public JLabel Deg2Gate_Lable = new JLabel("Degree 2 Gate:        ");
 
-    public JTextField RoverGPSX_Text = new JTextField("-----", 8);
-    public JTextField RoverGPSY_Text = new JTextField("-----", 8);
-    public JTextField LeaderGPSX_Text = new JTextField("-----", 8);
-    public JTextField LeaderGPSY_Text = new JTextField("-----", 8);
-    public JTextField Distance_Text = new JTextField("-----", 8);
-    public JTextField Deg2Target_Text = new JTextField("-----", 8);
+    public JTextField PlayerGpsX_Text = new JTextField("-----", 8);
+    public JTextField PlayerGpsY_Text = new JTextField("-----", 8);
+    public JTextField OpponentGpsX_Text = new JTextField("-----", 8);
+    public JTextField OpponentGpsY_Text = new JTextField("-----", 8);
+    public JTextField Distance2Ball_Text = new JTextField("-----", 8);
+    public JTextField Deg2Ball_Text = new JTextField("-----", 8);
+    public JTextField Deg2Gate_Text = new JTextField("-----", 8);
 
     public BPjsRoverControlPanel(BProgram bp, BProgramRunner rnr) {
         button = new JButton();
@@ -110,25 +112,28 @@ public class BPjsRoverControlPanel {
             }
         });
 
-        TelemPanel.add(RoverGPSX_Lable);
-        TelemPanel.add(RoverGPSX_Text);
-        niceText(RoverGPSX_Text);
-        TelemPanel.add(RoverGPSY_Lable);
-        TelemPanel.add(RoverGPSY_Text);
-        niceText(RoverGPSY_Text);
-        TelemPanel.add(LeaderGPSX_Lable);
-        TelemPanel.add(LeaderGPSX_Text);
-        niceText(LeaderGPSX_Text);
-        TelemPanel.add(LeaderGPSY_Lable);
-        TelemPanel.add(LeaderGPSY_Text);
-        niceText(LeaderGPSY_Text);
-        TelemPanel.add(Distance_Lable);
-        TelemPanel.add(Distance_Text);
-        niceText(Distance_Text);
-        TelemPanel.add(Deg2Target_Lable);
-        TelemPanel.add(Deg2Target_Text);
-        niceText(Deg2Target_Text);
-        TelemPanel.setLayout(new GridLayout(6, 2));
+        TelemPanel.add(PlayerGpsX_Lable);
+        TelemPanel.add(PlayerGpsX_Text);
+        niceText(PlayerGpsX_Text);
+        TelemPanel.add(PlayerGpsY_Lable);
+        TelemPanel.add(PlayerGpsY_Text);
+        niceText(PlayerGpsY_Text);
+        TelemPanel.add(OpponentGpsX_Lable);
+        TelemPanel.add(OpponentGpsX_Text);
+        niceText(OpponentGpsX_Text);
+        TelemPanel.add(OpponentGpsY_Lable);
+        TelemPanel.add(OpponentGpsY_Text);
+        niceText(OpponentGpsY_Text);
+        TelemPanel.add(Distance2Ball_Lable);
+        TelemPanel.add(Distance2Ball_Text);
+        niceText(Distance2Ball_Text);
+        TelemPanel.add(Deg2Ball_Lable);
+        TelemPanel.add(Deg2Ball_Text);
+        niceText(Deg2Ball_Text);
+        TelemPanel.add(Deg2Gate_Lable);
+        TelemPanel.add(Deg2Gate_Text);
+        niceText(Deg2Gate_Text);
+        TelemPanel.setLayout(new GridLayout(7, 2));
 
         ButtonsPanel.add(Startbutton);
 

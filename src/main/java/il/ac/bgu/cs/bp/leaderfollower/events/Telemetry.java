@@ -12,34 +12,34 @@ public class Telemetry extends BEvent implements java.io.Serializable {
     /**
      * The Telemetry
      */
-    public Double RovX;
+    public Double PlayerX;
 
-    public Double RovY;
+    public Double PlayerY;
 
-    public Double LeadX;
+    public Double OpponentX;
 
-    public Double LeadY;
+    public Double OpponentY;
 
-    public Double Compass;
+    public Double PlayerCompass;
+    
+    public Double PlayerDistanceToBall;
 
-    public Double Dist;
-
-    public Telemetry(Double RovX, Double RovY, Double LeadX, Double LeadY, Double Compass, Double Dist) {
-        super("Telemetry(" + RovX + "," + RovY + "," + LeadX + "," + LeadY + "," + Compass + "," + Dist + ")");
-        this.RovX = RovX;
-        this.RovY = RovY;
-        this.LeadX = LeadX;
-        this.LeadY = LeadY;
-        this.Compass = Compass;
-        this.Dist = Dist;
+    public Telemetry(Double PlayerX, Double PlayerY, Double OpponentX, Double OpponentY, Double PlayerCompass, Double PlayerDistanceToBall) {
+        super("Telemetry(" + PlayerX + "," + PlayerY + "," + OpponentX + "," + OpponentY + "," + PlayerCompass + "," + PlayerDistanceToBall + ")");
+        this.PlayerX = PlayerX;
+        this.PlayerY = PlayerY;
+        this.OpponentX = OpponentX;
+        this.OpponentY = OpponentY;
+        this.PlayerCompass = PlayerCompass;
+        this.PlayerDistanceToBall = PlayerDistanceToBall;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.RovX);
-        hash = 31 * hash + Objects.hashCode(this.LeadX);
-        hash = 31 * hash + Objects.hashCode(this.Compass);
+        hash = 31 * hash + Objects.hashCode(this.PlayerX);
+        hash = 31 * hash + Objects.hashCode(this.OpponentX);
+        hash = 31 * hash + Objects.hashCode(this.PlayerCompass);
         return hash;
     }
 
@@ -55,22 +55,22 @@ public class Telemetry extends BEvent implements java.io.Serializable {
             return false;
         }
         final Telemetry other = (Telemetry) obj;
-        if (!Objects.equals(this.RovX, other.RovX)) {
+        if (!Objects.equals(this.PlayerX, other.PlayerX)) {
             return false;
         }
-        if (!Objects.equals(this.RovY, other.RovY)) {
+        if (!Objects.equals(this.PlayerY, other.PlayerY)) {
             return false;
         }
-        if (!Objects.equals(this.LeadX, other.LeadX)) {
+        if (!Objects.equals(this.OpponentX, other.OpponentX)) {
             return false;
         }
-        if (!Objects.equals(this.LeadY, other.LeadY)) {
+        if (!Objects.equals(this.OpponentY, other.OpponentY)) {
             return false;
         }
-        if (!Objects.equals(this.Compass, other.Compass)) {
+        if (!Objects.equals(this.PlayerCompass, other.PlayerCompass)) {
             return false;
         }
-        if (!Objects.equals(this.Dist, other.Dist)) {
+        if (!Objects.equals(this.PlayerDistanceToBall, other.PlayerDistanceToBall)) {
             return false;
         }
         return true;

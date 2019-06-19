@@ -1,12 +1,10 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
-import il.ac.bgu.cs.bp.bpjs.analysis.BProgramStateVisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsBProgramVerifier;
-import il.ac.bgu.cs.bp.bpjs.analysis.Node;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
 import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
+import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import java.io.PrintStream;
 
@@ -22,7 +20,7 @@ public class ComplexEnvironmentVerification {
     
     public void start() throws Exception {
         // create the compound model
-        BProgram model = new SingleResourceBProgram("ControllerLogic.js");
+        BProgram model = new ResourceBProgram("ControllerLogic.js");
         model.prependSource( readResource("CommonLib.js") );
         model.appendSource( readResource("ComplexSimulatedEnvironment.js") );
         model.appendSource( readResource("ComplexEnvironmentAssertions.js") );

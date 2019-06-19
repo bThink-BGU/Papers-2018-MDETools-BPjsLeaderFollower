@@ -4,14 +4,14 @@ import il.ac.bgu.cs.bp.bpjs.execution.BProgramRunner;
 import il.ac.bgu.cs.bp.bpjs.execution.listeners.BProgramRunnerListenerAdapter;
 import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
-import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
+import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
+import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.ExtractedGpsData;
 import il.ac.bgu.cs.bp.leaderfollower.events.GoSlowGradient;
 import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
 import il.ac.bgu.cs.bp.leaderfollower.events.Telemetry;
 import java.awt.Color;
-
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
@@ -28,229 +28,191 @@ import javax.swing.SwingUtilities;
  *
  * @author Aviran
  * @author Michael
+ * @author Achiya
  */
 public class BPJsRoverControl {
+  // GUI of the robot control panel
+  public static BPjsRoverControlPanel robotControlPanel;
 
-    // GUI of the robot control panel 
-    public static BPjsRoverControlPanel robotControlPanel;
+  private static final SocketCommunicator playerBridge = new SocketCommunicator();
+  private static PlayerCommands player;
 
-    private static final SocketCommunicator rover = new SocketCommunicator();
-    private static final SocketCommunicator ref = new SocketCommunicator();
-    private static DriveCommands drive;
-    public static String IP = "127.0.0.1";
+  public static void main(String[] args) throws InterruptedException, IOException {
+    System.out.println("Starting player control program");
+    int maxSteps = 310;
+    Double[] d2TAllTime = new Double[maxSteps];
+    Double[] disAllTime = new Double[maxSteps];
+    int playerPort = 0;
+    int playerId = 1;
+    String ip = "127.0.0.1";
+    String playerName = "player";
+    String opponentPlayerName = "player";
+    ExtractedGpsData playerGate;
+    ExtractedGpsData opponentGate;
 
-    public static void main(String[] args) throws InterruptedException, IOException {
-        
-        System.out.println("Starting rover control program");
-        int refPort = 0;
-        int roverPort = 0;
-        int maxSteps = 310;
-        Double[] d2TAllTime = new Double[maxSteps];
-        Double[] disAllTime = new Double[maxSteps];
+    try {
+      if (args.length == 1) {
+        playerId = Integer.parseInt(args[0]);
+      }
+      if (playerId == 1) {
+        playerName += playerId;
+        opponentPlayerName += 3;
+        playerGate = new ExtractedGpsData(0, 50);
+        opponentGate = new ExtractedGpsData(0, -50);
+      } else {
+        playerName += 3;
+        opponentPlayerName += playerId;
+        playerGate = new ExtractedGpsData(0, -50);
+        opponentGate = new ExtractedGpsData(0, 50);
+      }
+      playerName += (playerId == 1 ? playerId : 3);
+      opponentPlayerName += (playerId == 1 ? 3 : playerId);
 
-        try {
-            //------ Load config
-            java.util.List<String> conf = Arrays.asList(readResource("config.txt").split("\n"));
-            Iterator<String> conIt = conf.iterator();
-            while (conIt.hasNext()) {
-                String a = conIt.next();
-                if (a.contains("=")) {
-                    String vals[] = a.split("=", 2);
-                    vals[0] = vals[0].trim();
-                    vals[1] = vals[1].trim();
-                    if (vals[0].equals("controlPort")) {
-                        roverPort = Integer.parseInt(vals[1]);
-                    }
-                    if (vals[0].equals("observationPort")) {
-                        refPort = Integer.parseInt(vals[1]);
-                    }
-                }
-            }
-            System.out.println("Connecting rover...");
-            rover.connectToServer(IP, roverPort);
-
-            System.out.println("Connecting ref...");
-            ref.connectToServer(IP, refPort);
-            drive = new DriveCommands(rover, "Rover");
-            
-        } catch (Exception e) {
-            System.out.println("Error setting up program");
-            e.printStackTrace();
-            System.exit(-1);
+      // ------ Load config
+      java.util.List<String> conf = Arrays.asList(readResource("config.txt").split("\n"));
+      Iterator<String> conIt = conf.iterator();
+      while (conIt.hasNext()) {
+        String a = conIt.next();
+        if (a.contains("=")) {
+          String vals[] = a.split("=", 2);
+          String key = vals[0].trim();
+          String value = vals[1].trim();
+          if (key.equals("simulationIP")) {
+            ip = value;
+          }
+          if (key.equals("player" + playerId + "Port")) {
+            playerPort = Integer.parseInt(value);
+          }
         }
+      }
+      System.out.println("Connecting rover...");
+      playerBridge.connectToServer(ip, playerPort);
 
-        BProgram bprog = new SingleResourceBProgram("ControllerLogic.js");
-        bprog.prependSource( readResource("CommonLib.js") );
-        
-        bprog.setDaemonMode(true);
-        BProgramRunner rnr = new BProgramRunner(bprog);
+      System.out.println("Connecting ref...");
+      player = new PlayerCommands(playerBridge, playerName);
 
-        // Print program events to the console
-        rnr.addListener(new PrintBProgramRunnerListener());
-        rnr.addListener(new BProgramRunnerListenerAdapter() {
-            int stepCount = 0;
-            DecimalFormat fmt = new DecimalFormat("#0.000");
-            
-            @Override
-            public void eventSelected(BProgram bp, BEvent theEvent) {
-                if (theEvent.equals(StaticEvents.START_CONTROL)) {
-                    robotControlPanel.Startbutton.setEnabled(false);
-                    System.out.println("program: " + ref.send("ready"));
-                    Thread tmrThread = new Thread(() -> {
-                        try {
-                            Thread.sleep(250);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        while (true) {
-                            try {
-                                Thread.sleep(180);
-                            } catch (InterruptedException e1) {
-                                e1.printStackTrace();
-                            }
-                            bp.enqueueExternalEvent(StaticEvents.TICK);
-                        }
-                    });
-                    tmrThread.start();
-                }
-
-                if (theEvent.equals(StaticEvents.TURN_LEFT)) {
-                    drive.left();
-                }
-                if (theEvent.equals(StaticEvents.TURN_RIGHT)) {
-                    drive.right();
-                }
-                if (theEvent.equals(StaticEvents.GO_TO_TARGET)) {
-                    drive.go();
-                }
-                if (theEvent instanceof GoSlowGradient) {
-                    drive.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
-                }
-                if (theEvent.equals(StaticEvents.TICK)) {
-                    Double distance, compassDeg, deg2Target;
-                    ExtractedGpsData leaderGpsData = new ExtractedGpsData(ref.send("Leader,GPS()"));
-                    ExtractedGpsData roverGpsData = new ExtractedGpsData(rover.send("Rover,GPS()"));
-                    distance = extractData(ref.send("Leader,Distance()"));
-                    compassDeg = extractData(rover.send("Rover,getCompass()"));
-                    deg2Target = compDeg2Target(leaderGpsData.x, leaderGpsData.y, roverGpsData.x, roverGpsData.y, compassDeg);
-                    
-                    SwingUtilities.invokeLater(()->{
-                        robotControlPanel.LeaderGPSY_Text.setText(fmt.format(leaderGpsData.y));
-                        robotControlPanel.LeaderGPSX_Text.setText(fmt.format(leaderGpsData.x));
-                        robotControlPanel.RoverGPSX_Text.setText(fmt.format(leaderGpsData.x));
-                        robotControlPanel.RoverGPSY_Text.setText(fmt.format(leaderGpsData.y));
-                        robotControlPanel.Distance_Text.setText(fmt.format(distance));
-                        robotControlPanel.Distance_Text.setBackground( (distance<12||distance>15) ? Color.RED : Color.GREEN );
-                        robotControlPanel.Deg2Target_Text.setText(fmt.format(deg2Target));
-                    });
-
-                    bp.enqueueExternalEvent(new Telemetry(roverGpsData.x, roverGpsData.y, leaderGpsData.x, leaderGpsData.y, compassDeg, distance));
-                    if (stepCount < maxSteps) {
-                        System.out.println(stepCount);
-                        d2TAllTime[stepCount] = deg2Target;
-                        disAllTime[stepCount] = distance;
-                        
-                    } else if (stepCount == maxSteps) {
-                        System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
-                        System.out.println("DistArray: " + Arrays.toString(disAllTime));
-                        try {
-                            writeToFile("SimDataDeg.csv", "DegToTarget: ", d2TAllTime);
-                            writeToFile("SimDataDist.csv", "DistanceToTarget: ", disAllTime);
-                            rover.close();
-                            System.exit(0);
-                        } catch (IOException ex) {
-                            Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    stepCount++;
-                    robotControlPanel.TimeLabel.setText(Integer.toString(stepCount));
-                }
-            }
-        });
-        
-        SwingUtilities.invokeLater(()->{
-            robotControlPanel = new BPjsRoverControlPanel(bprog, rnr);
-        });
-        rnr.run();
+    } catch (Exception e) {
+      System.out.println("Error setting up program");
+      e.printStackTrace();
+      System.exit(-1);
     }
 
-    // file read
-    public static void writeToFile(String fileName, String dataInfo, Double[] theArray) throws IOException {
-        FileWriter fW = new FileWriter(fileName, true);
-        BufferedWriter bW = new BufferedWriter(fW);
-        try {
-            Instant a = Instant.now();
-            bW.append("[" + a.toString() + "], " + dataInfo + "," + Arrays.toString(theArray).substring(1, Arrays.toString(theArray).length() - 1) + "\n");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            bW.flush();
-            bW.close();
-        }
-    }
+    BProgram bprog = new ResourceBProgram("ControllerLogic.js");
+    bprog.prependSource(readResource("CommonLib.js"));
 
-    public static class ExtractedGpsData {
+    bprog.setWaitForExternalEvents(true);
+    BProgramRunner rnr = new BProgramRunner(bprog);
 
-        public Double x;
-        public Double y;
+    // Print program events to the console
+    rnr.addListener(new PrintBProgramRunnerListener());
+    rnr.addListener(new BProgramRunnerListenerAdapter() {
+      int stepCount = 0;
+      DecimalFormat fmt = new DecimalFormat("#0.000");
 
-        /**
-         * Extracts The Data
-         * @param theGpsMessage message text form the GPS.
-         */
-        public ExtractedGpsData(String theGpsMessage) {
-            String[] StringSplit;
-            String Stringofx;
-            String Stringofy;
-
-            StringSplit = theGpsMessage.split(",");
-            Stringofx = StringSplit[1];
-            Stringofy = StringSplit[2].subSequence(0, StringSplit[2].indexOf(";")).toString();
-
-            this.x = Double.parseDouble(Stringofx);
-            this.y = Double.parseDouble(Stringofy);
-        }
-    }
-
-    public static Double extractData(String TheDistanceMessage) {
-        String[] StringSplit;
-        String StringofDistance;
-
-        StringSplit = TheDistanceMessage.split(",");
-        StringofDistance = StringSplit[1].subSequence(0, StringSplit[1].indexOf(";")).toString();
-
-        return Double.parseDouble(StringofDistance);
-    }
-
-    public static Double compDeg2Target(Double xL, Double yL, Double xR, Double yR, Double CompassDeg) {
-        Double DDeg, LRDeg;
-
-        LRDeg = atan2((yL - yR), (xL - xR));
-//        System.out.println("LRDeg1: " + LRDeg.toString());
-        LRDeg = (LRDeg / Math.PI) * 180;
-//        System.out.println("LRDeg2: " + LRDeg.toString());
-        DDeg = (90 - CompassDeg) - LRDeg;
-//        System.out.println("DDeg1: " + DDeg.toString());
-        if (abs(DDeg) >= 360) {
-            if (DDeg > 0) {
-                DDeg = DDeg - 360;
-//                System.out.println("DDeg2: " + DDeg.toString());
-            } else {
-                DDeg = DDeg + 360;
-//                System.out.println("DDeg3: " + DDeg.toString());
+      @Override
+      public void eventSelected(BProgram bp, BEvent theEvent) {
+        if (theEvent.equals(StaticEvents.START_CONTROL)) {
+          robotControlPanel.Startbutton.setEnabled(false);
+          Thread tmrThread = new Thread(() -> {
+            try {
+              Thread.sleep(250);
+            } catch (InterruptedException ex) {
+              Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        if (abs(DDeg) > 180) {
-            if (DDeg > 180) {
-                DDeg = DDeg - 360;
-//                System.out.println("DDeg4: " + DDeg.toString());
+            while (true) {
+              try {
+                Thread.sleep(180);
+              } catch (InterruptedException e1) {
+                e1.printStackTrace();
+              }
+              bp.enqueueExternalEvent(StaticEvents.TICK);
             }
-            if (DDeg < (-180)) {
-                DDeg = DDeg + 360;
-//                System.out.println("DDeg5: " + DDeg.toString());
-            }
+          });
+          tmrThread.start();
         }
-//        System.out.println("DDeg5: " + DDeg.toString());
-        return DDeg;
+
+        if (theEvent.equals(StaticEvents.TURN_LEFT)) {
+          player.left();
+        }
+        if (theEvent.equals(StaticEvents.TURN_RIGHT)) {
+          player.right();
+        }
+        if (theEvent.equals(StaticEvents.GO_TO_TARGET)) {
+          player.go();
+        }
+        if (theEvent instanceof GoSlowGradient) {
+          player.controlPower(((GoSlowGradient) theEvent).power, ((GoSlowGradient) theEvent).power);
+        }
+        if (theEvent.equals(StaticEvents.TICK)) {
+          Double playerDistanceToBall, opponentDistanceToBall, playerCompassDeg, opponentCompassDeg,
+              degreeToBall, degreeToGate;
+          ExtractedGpsData playerGpsData = player.getPlayerGps();
+          ExtractedGpsData opponentGpsData = player.getOpponentGps();
+          ExtractedGpsData ballGpsData = player.getBallGps();
+          playerCompassDeg = player.getPlayerCompass();
+          opponentCompassDeg = player.getOpponentCompass();
+          degreeToBall = player.getDegreeToTarget(ballGpsData, playerGpsData, playerCompassDeg);
+          degreeToGate = player.getDegreeToTarget(playerGate, playerGpsData, playerCompassDeg);
+
+          SwingUtilities.invokeLater(() -> {
+            robotControlPanel.PlayerGpsY_Text.setText(fmt.format(playerGpsData.y));
+            robotControlPanel.PlayerGpsX_Text.setText(fmt.format(playerGpsData.x));
+            robotControlPanel.OpponentGpsY_Text.setText(fmt.format(opponentGpsData.y));
+            robotControlPanel.OpponentGpsX_Text.setText(fmt.format(opponentGpsData.x));
+            robotControlPanel.Distance2Ball_Text.setText(fmt.format(playerDistanceToBall));
+            robotControlPanel.Distance2Ball_Text.setBackground(
+                (playerDistanceToBall < 12 || playerDistanceToBall > 15) ? Color.RED : Color.GREEN);
+            robotControlPanel.Deg2Ball_Text.setText(fmt.format(degreeToBall));
+            robotControlPanel.Deg2Gate_Text.setText(fmt.format(degreeToGate));
+          });
+
+          bp.enqueueExternalEvent(new Telemetry(playerGpsData.x, playerGpsData.y, opponentGpsData.x,
+              opponentGpsData.y, playerCompassDeg, playerDistanceToBall));
+          if (stepCount < maxSteps) {
+            System.out.println(stepCount);
+            d2TAllTime[stepCount] = degreeToBall;
+            disAllTime[stepCount] = playerDistanceToBall;
+
+          } else if (stepCount == maxSteps) {
+            System.out.println("D2tArray: " + Arrays.toString(d2TAllTime));
+            System.out.println("DistArray: " + Arrays.toString(disAllTime));
+            try {
+              writeToFile("SimDataDeg.csv", "DegToTarget: ", d2TAllTime);
+              writeToFile("SimDataDist.csv", "DistanceToTarget: ", disAllTime);
+              playerBridge.close();
+              System.exit(0);
+            } catch (IOException ex) {
+              Logger.getLogger(BPJsRoverControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          }
+          stepCount++;
+          robotControlPanel.TimeLabel.setText(Integer.toString(stepCount));
+        }
+      }
+    });
+
+    SwingUtilities.invokeLater(() -> {
+      robotControlPanel = new BPjsRoverControlPanel(bprog, rnr);
+    });
+    rnr.run();
+  }
+
+  // file read
+  public static void writeToFile(String fileName, String dataInfo, Double[] theArray)
+      throws IOException {
+    FileWriter fW = new FileWriter(fileName, true);
+    BufferedWriter bW = new BufferedWriter(fW);
+    try {
+      Instant a = Instant.now();
+      bW.append("[" + a.toString() + "], " + dataInfo + ","
+          + Arrays.toString(theArray).substring(1, Arrays.toString(theArray).length() - 1) + "\n");
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } finally {
+      bW.flush();
+      bW.close();
     }
+  }
+
+
 }
