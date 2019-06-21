@@ -1,14 +1,22 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
+import java.io.IOException;
+
 // format commands to unity string messages.
 public class PlayerCommands {
   private String playerName;
   private String opponentName;
   private SocketCommunicator player;
 
-  public PlayerCommands(SocketCommunicator sc, String n) {
-    player = sc;
-    playerName = n;
+  public PlayerCommands(String playerName, String opponentName)
+      throws IOException {
+    this.playerName = playerName;
+    this.opponentName = opponentName;
+  }
+
+  public void connectToServer(String ip, int port) throws IOException {
+    player = new SocketCommunicator();
+    player.connectToServer(ip, port);
   }
 
   public void forward() {
@@ -169,5 +177,9 @@ public class PlayerCommands {
     public String toString() {
       return this.x + "," + this.z;
     }
+  }
+
+  public void close() {
+    player.close();
   }
 }

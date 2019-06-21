@@ -12,10 +12,6 @@ var esExternalRoverEvents = bp.EventSet("externalRoverEvents", function (e) {
   return (e.name.match(EXTERNAL_ROVER_EVENT_NAME_FILTER) !== null);
 });
 
-var AnyTelemetry = bp.EventSet("telemetries", function (e) {
-  return e instanceof Telemetry;
-});
-
 var AnyGoSlowGradient = bp.EventSet("ParameterizedMoves", function (e) {
   return e instanceof ParameterizedMove;
 });
@@ -88,13 +84,13 @@ function parseExternalRoverEvent(player, evt) {
     return statusRotate(player, -PLAYER_ROTATION_UNIT);
   } else if (evt.name == StaticEvents.TURN_RIGHT.name) {
     return statusRotate(player, PLAYER_ROTATION_UNIT);
-  } else if (evt.name == StaticEvents.MOVE_FORWARD.name) {
+  } else if (evt.name == StaticEvents.FORWARD.name) {
     return statusMove(player, PLAYER_MAX_STEP);
-  } else if (evt.name == StaticEvents.MOVE_BACKWORD.name) {
+  } else if (evt.name == StaticEvents.BACKWORD.name) {
     return statusMove(player, -PLAYER_MAX_STEP);
-  } else if (evt.name == StaticEvents.MOVE_RIGHT.name) {
+  } else if (evt.name == StaticEvents.RIGHT.name) {
     return statusMove(player, PLAYER_MAX_STEP);
-  } else if (evt.name == StaticEvents.MOVE_LEFT.name) {
+  } else if (evt.name == StaticEvents.LEFT.name) {
     return statusMove(player, PLAYER_MAX_STEP);
   } else if (evt.name.match(/^ParameterizedMoves/)) {
     var amountX = evt.powerX;

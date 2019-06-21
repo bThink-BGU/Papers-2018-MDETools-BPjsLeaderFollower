@@ -13,15 +13,15 @@ var esFBwardEvents = bp.EventSet("FBwardEvents", function (e) {
 
 bp.registerBThread("MoveForward", function () {
   while (true) {
-    bp.sync({ waitFor: AnyTelemetry });
-    bp.sync({ request: StaticEvents.MOVE_FORWARD });
+    bp.sync({ waitFor: Telemetry.ANY });
+    bp.sync({ request: StaticEvents.FORWARD });
   }
 });
 
 // Fixes rover orientation while blocking forward movement.
 bp.registerBThread("SpinToBall", function () {
   while (true) {
-    var et = bp.sync({ waitFor: AnyTelemetry });
+    var et = bp.sync({ waitFor: Telemetry.ANY });
     var degToTarget = compDegToTarget(et.BallGps.x, et.BallGps.y, et.PlayerGps.x, et.PlayerGps.y, et.PlayerCompass);
     while (Math.abs(degToTarget) > 4) {
       // must correct rover orientation
@@ -30,7 +30,7 @@ bp.registerBThread("SpinToBall", function () {
       } else {
         bp.sync({ request: StaticEvents.TURN_LEFT, block: esFBwardEvents });
       }
-      et = bp.sync({ waitFor: AnyTelemetry, block: esFBwardEvents });
+      et = bp.sync({ waitFor: Telemetry.ANY, block: esFBwardEvents });
       var degToTarget = compDegToTarget(et.BallGps.x, et.BallGps.y, et.PlayerGps.x, et.PlayerGps.y, et.PlayerCompass);
     }
   }
@@ -41,15 +41,15 @@ var tooFar = 15;
 
 bp.registerBThread("NotTooClose", function () {
   while (true) {
-    var lastTelemetry = bp.sync({ waitFor: AnyTelemetry });
+    var lastTelemetry = bp.sync({ waitFor: Telemetry.ANY });
     while (lastTelemetry.DistancePlayerToBall < tooFar) {
       if (lastTelemetry.DistancePlayerToBall >= tooClose - (tooFar - tooClose)) {
         var slowDownPower = Math.round(((lastTelemetry.Dist - tooClose) / (tooFar - tooClose)) * 100);
-        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(slowDownPower,0,0), block: StaticEvents.MOVE_FORWARD });
+        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(slowDownPower,0,0), block: StaticEvents.FORWARD });
       } else {
-        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(-100,0,0), block: StaticEvents.MOVE_FORWARD });
+        bp.sync({ waitFor: [StaticEvents.TURN_RIGHT, StaticEvents.TURN_LEFT], request: ParameterizedMove(-100,0,0), block: StaticEvents.FORWARD });
       }
-      lastTelemetry = bp.sync({ waitFor: AnyTelemetry, block: StaticEvents.MOVE_FORWARD });
+      lastTelemetry = bp.sync({ waitFor: Telemetry.ANY, block: StaticEvents.FORWARD });
     }
   }
 });
