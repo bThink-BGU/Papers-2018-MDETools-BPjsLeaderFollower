@@ -34,7 +34,7 @@ public class SocketCommunicator {
         }
         out.println(message);
         try {
-            reply = in.readLine();
+            reply = getMessage();
         }
         catch(java.io.IOException e){ e.printStackTrace();}
         return reply;
@@ -42,6 +42,10 @@ public class SocketCommunicator {
     // expecting no reply.
     public void noReply(String message){
       out.println(message);
+    }
+
+    public String getMessage() throws IOException {
+        return in.readLine();
     }
 
     // Closes the connection on the socket

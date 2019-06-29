@@ -1,25 +1,28 @@
 package il.ac.bgu.cs.bp.leaderfollower.events;
 
+import java.util.Objects;
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 
 @SuppressWarnings("serial")
 public class ParameterizedMove extends BEvent implements java.io.Serializable {
 
-    public final int powerX;
-    public final int powerZ;
-    public final int spin;
+    public final Integer powerForward;
+    public final Integer powerRight;
+    public final Integer spin;
 
-    public ParameterizedMove(int powerX, int powerZ, int spin) {
-        super(String.format("ParameterizedMove(%d,%d,%d)", powerX, powerZ, spin));
-        this.powerX = powerX;
-        this.powerZ = powerZ;
+    public ParameterizedMove(Integer powerForward, Integer powerLeft, Integer spin) {
+        super(String.format("ParameterizedMove(%d,%d,%d)", powerForward, powerLeft, spin));
+        this.powerForward = powerForward;
+        this.powerRight = powerLeft;
         this.spin = spin;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.powerX;
+        if(powerForward != null) hash = 89 * hash + this.powerForward;
+        if(powerRight != null) hash = 89 * hash + this.powerRight;
+        if(spin != null) hash = 89 * hash + this.spin;
         return hash;
     }
 
@@ -35,8 +38,8 @@ public class ParameterizedMove extends BEvent implements java.io.Serializable {
             return false;
         }
         final ParameterizedMove other = (ParameterizedMove) obj;
-        return this.powerX == other.powerX && this.powerZ == other.powerZ
-                && this.spin == other.spin;
+        return Objects.equals(other.powerForward, this.powerForward) &&
+            Objects.equals(other.powerRight, this.powerRight);
     }
 
 

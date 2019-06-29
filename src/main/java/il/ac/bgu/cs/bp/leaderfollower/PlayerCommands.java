@@ -5,18 +5,20 @@ import java.io.IOException;
 // format commands to unity string messages.
 public class PlayerCommands {
   private String playerName;
-  private String opponentName;
   private SocketCommunicator player;
+  private final String ip;
+  private final int port;
 
-  public PlayerCommands(String playerName, String opponentName)
+  public PlayerCommands(String playerName, String simulationIp, int playerPort)
       throws IOException {
     this.playerName = playerName;
-    this.opponentName = opponentName;
+    this.ip = simulationIp;
+    this.port = playerPort;
   }
 
-  public void connectToServer(String ip, int port) throws IOException {
+  public void connectToServer() throws IOException {
     player = new SocketCommunicator();
-    player.connectToServer(ip, port);
+    player.connectToServer(this.ip, this.port);
   }
 
   public void forward() {
@@ -24,10 +26,11 @@ public class PlayerCommands {
     System.out.println(playerName + ",moveForward(100)");
   }
 
-  public void parameterizedMove(int powerX, int powerZ, int spin) {
-    player.noReply(playerName + ",moveForward(" + powerX + ")");
-    player.noReply(playerName + ",moveRight(" + powerZ + ")");
-    player.noReply(playerName + ",spin(" + spin + ")");
+  public void parameterizedMove(Integer powerForward, Integer powerLeft, Integer spin) {
+    // System.out.println("f: "+powerForward + ",r: "+powerLeft+",s: "+spin);
+    if(powerForward != null) player.noReply(playerName + ",moveForward(" + powerForward + ")");
+    if(powerLeft != null) player.noReply(playerName + ",moveRight(" + powerLeft + ")");
+    if(spin != null) player.noReply(playerName + ",spin(" + spin + ")");
   }
 
   public void right() {
@@ -65,22 +68,18 @@ public class PlayerCommands {
     System.out.println(playerName + ",setSuction(100)");
   }
 
-  public void stop() {
+  public void stopMoving() {
     player.noReply(playerName + ",stop()");
     System.out.println(playerName + ",stop()");
   }
 
-  public void spinStop() {
+  public void stopSpinning() {
     player.noReply(playerName + ",spin(0)");
     System.out.println(playerName + ",spin(0)");
   }
 
   public GpsData getPlayerGps() {
     return new GpsData(player.send(this.playerName + ",GPS()"));
-  }
-
-  public GpsData getOpponentGps() {
-    return new GpsData(player.send(this.opponentName + ",GPS()"));
   }
 
   public GpsData getBallGps() {
@@ -91,20 +90,6 @@ public class PlayerCommands {
     return extractData(player.send(this.playerName + ",getCompass()"));
   }
 
-  public Double getOpponentCompass() {
-    return extractData(player.send(this.opponentName + ",getCompass()"));
-  }
-
-  public Double getDegreeToTarget(GpsData target, GpsData source, Double sourceDegree) {
-    return compDeg2Target(target.x, target.y, source.x, source.y, sourceDegree);
-  }
-
-  public Double getDistance(GpsData pA, GpsData pB) {
-    double dx = Math.abs(pA.x - pB.x);
-    double dz = Math.abs(pA.z - pB.z);
-    return Math.sqrt(Math.pow(dx, 2) + Math.pow(dz, 2));
-  }
-
   private static Double extractData(String TheDistanceMessage) {
     String[] StringSplit;
     String StringofDistance;
@@ -112,31 +97,6 @@ public class PlayerCommands {
     StringSplit = TheDistanceMessage.split(",");
     StringofDistance = StringSplit[1].subSequence(0, StringSplit[1].indexOf(";")).toString();
     return Double.parseDouble(StringofDistance);
-  }
-
-  private static Double compDeg2Target(Double xTarget, Double yTarget, Double xSource,
-      Double ySource, Double sourceDegree) {
-    Double DDeg, LRDeg;
-
-    LRDeg = Math.atan2((yTarget - ySource), (xTarget - xSource));
-    LRDeg = (LRDeg / Math.PI) * 180;
-    DDeg = (90 - sourceDegree) - LRDeg;
-    if (Math.abs(DDeg) >= 360) {
-      if (DDeg > 0) {
-        DDeg = DDeg - 360;
-      } else {
-        DDeg = DDeg + 360;
-      }
-    }
-    if (Math.abs(DDeg) > 180) {
-      if (DDeg > 180) {
-        DDeg = DDeg - 360;
-      }
-      if (DDeg < (-180)) {
-        DDeg = DDeg + 360;
-      }
-    }
-    return DDeg;
   }
 
   public static class GpsData {
