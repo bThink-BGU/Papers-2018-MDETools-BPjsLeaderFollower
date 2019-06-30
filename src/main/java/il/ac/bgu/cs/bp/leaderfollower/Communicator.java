@@ -45,23 +45,20 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
   public void run() {
     try {
       Thread.sleep(200);
-      collectTelemetry();
+      int sleep = 30;
       while (true) {
-        BEvent e = eventsQueue.poll(27, TimeUnit.MILLISECONDS);
-        boolean sleep = true;
+        BEvent e = eventsQueue.poll(sleep, TimeUnit.MILLISECONDS);
+        sleep = 30;
         if (e == null) {
           collectTelemetry();
-          sleep = false;
         } else if (e.name.equals("Suck")) {
           player.suck();
         } else if (e.name.equals("Expel")) {
           player.expel();
         } else if (e instanceof ParameterizedMove) {
           ParameterizedMove move = (ParameterizedMove) e;
-          player.parameterizedMove(move.powerForward, move.powerRight, move.spin);
-        }
-        if(sleep) {
-          // Thread.sleep(5);
+          player.parameterizedMove(move.powerForward, move.powerLeft, move.spin);
+          // if(move.spin != null) sleep -= 10;
         }
       }
     } catch (InterruptedException ex) {
@@ -72,7 +69,7 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
   @Override
   public void eventSelected(BProgram bp, BEvent theEvent) {
     if (theEvent instanceof ParameterizedMove || theEvent.name.equals("Suck")
-        || theEvent.name.equals("Expel"))
+    || theEvent.name.equals("Expel"))
       try {
         eventsQueue.put(theEvent);
       } catch (InterruptedException e) {
@@ -84,12 +81,19 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
     thread = new Thread(this);
     thread.start();
   }
-
+  
   private void collectTelemetry() {
+    GpsData playerGpsData, ballGpsData;
     Double playerCompassDeg;
-    GpsData playerGpsData = player.getPlayerGps();
-    GpsData ballGpsData = player.getBallGps();
-    playerCompassDeg = player.getPlayerCompass();
+    try {
+      playerGpsData = player.getPlayerGps();
+      ballGpsData = player.getBallGps();
+      playerCompassDeg = player.getPlayerCompass();
+    } catch (Exception e) {
+      Logger.getLogger(BPJsRobotControl.class.getName()).log(Level.SEVERE, "NO TELEMETRY RECIEVED");
+      return;
+    }
+    
     Telemetry t = new Telemetry(playerGpsData, ballGpsData, playerGate, playerCompassDeg);
 
     SwingUtilities.invokeLater(() -> {

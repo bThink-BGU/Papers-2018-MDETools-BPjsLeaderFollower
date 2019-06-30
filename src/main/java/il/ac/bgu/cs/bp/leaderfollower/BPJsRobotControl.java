@@ -1,15 +1,12 @@
 package il.ac.bgu.cs.bp.leaderfollower;
 
-import il.ac.bgu.cs.bp.bpjs.execution.BProgramRunner;
+import il.ac.bgu.cs.bp.bpjs.context.ContextService;
 import il.ac.bgu.cs.bp.bpjs.execution.listeners.BProgramRunnerListenerAdapter;
-import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
 import il.ac.bgu.cs.bp.bpjs.model.eventselection.PrioritizedBSyncEventSelectionStrategy;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
-import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
 import java.util.*;
 import java.io.IOException;
 
@@ -25,43 +22,45 @@ public class BPJsRobotControl {
   private final PlayerData[] players;
   private final PlayerCommands playerCommands;
   private final PlayerData player;
-  private final Referee referee;
+  private final RefereeListener referee;
+  private final int possessionTimer;
   private final String ip;
   private final int playerId;
   private final BProgram bprog;
-  private final BProgramRunner rnr;
+  private final ContextService contextService;
   private final Communicator communicator;
- 
-  public BPJsRobotControl(Optional<String> simulationIp, OptionalInt player1Port, OptionalInt player2Port,
-      OptionalInt refereePort, OptionalInt thePlayerId) throws IOException {
+
+  public BPJsRobotControl(Optional<String> simulationIp, OptionalInt player1Port,
+      OptionalInt player2Port, OptionalInt refereePort, OptionalInt thePlayerId, OptionalInt possessionTime)
+      throws IOException {
     this.ip = simulationIp.orElse("127.0.0.1");
+    this.possessionTimer = possessionTime.orElse(10);
     this.playerId = thePlayerId.orElse(2);
     int opponentId = (this.playerId + 1) % 2;
     this.players = new PlayerData[] {
-      new PlayerData(player1Port.orElse(9001), "player"+1, 1, new GpsData(50, 0, 0)),
-      new PlayerData(player2Port.orElse(9003), "player"+2, 2, new GpsData(-50, 0, 0))
-    };
-    this.player = players[playerId-1];
+        new PlayerData(player1Port.orElse(9001), "player" + 1, 1, new GpsData(50, 0, 0)),
+        new PlayerData(player2Port.orElse(9003), "player" + 2, 2, new GpsData(-50, 0, 0))};
+    this.player = players[playerId - 1];
     this.playerCommands = new PlayerCommands(player.name, this.ip, player.port);
-        this.bprog = new ResourceBProgram("ControllerLogic.js");
-    // this.bprog.prependSource(readResource("CommonLib.js"));
-    this.bprog.putInGlobalScope("player", player);
-    this.bprog.putInGlobalScope("opponent", players[opponentId-1]);
-    this.bprog.setWaitForExternalEvents(true);
-    bprog.setEventSelectionStrategy(new PrioritizedBSyncEventSelectionStrategy());
-    // SwingUtilities.invokeLater(() -> {
-      this.controlPanel = new ControlPanel(bprog);
-    // });
-    this.referee = new Referee(this.ip, refereePort.orElse(9007), bprog, controlPanel);
-    this.communicator = new Communicator(bprog, playerCommands, player, controlPanel);
-    this.rnr = new BProgramRunner(bprog);
 
-    rnr.addListener(new PrintBProgramRunnerListener());
-    rnr.addListener(communicator);
-    rnr.addListener(new BProgramRunnerListenerAdapter() {
+    this.contextService = ContextService.getInstance();
+    contextService.initFromResources("ContextDB", "ContextualControllerLogic.js");
+    this.bprog = contextService.getBProgram();
+    this.bprog.putInGlobalScope("player", player);
+    this.bprog.putInGlobalScope("opponent", players[opponentId - 1]);
+    this.bprog.setWaitForExternalEvents(true);
+    // SwingUtilities.invokeLater(() -> {
+    this.controlPanel = new ControlPanel(bprog);
+    // });
+    this.referee = new RefereeListener(this.ip, refereePort.orElse(9007), bprog, controlPanel, possessionTimer);
+    this.communicator = new Communicator(bprog, playerCommands, player, controlPanel);
+
+    // contextService.addListener(new PrintBProgramRunnerListener());
+    contextService.addListener(communicator);
+    contextService.addListener(new BProgramRunnerListenerAdapter() {
       @Override
       public void eventSelected(BProgram bp, BEvent theEvent) {
-        if (theEvent.equals(StaticEvents.START_CONTROL)) {
+        if (theEvent.name.equals("Start Control")) {
           try {
             playerCommands.connectToServer();
           } catch (IOException e) {
@@ -75,7 +74,7 @@ public class BPJsRobotControl {
   }
 
   private void start() {
-    rnr.run();
+    contextService.run();
   }
 
   public static void main(String[] args) throws InterruptedException, IOException {
@@ -84,6 +83,7 @@ public class BPJsRobotControl {
     OptionalInt player1Port = OptionalInt.empty();
     OptionalInt player2Port = OptionalInt.empty();
     OptionalInt refereePort = OptionalInt.empty();
+    OptionalInt possessionTimer = OptionalInt.empty();
     Optional<String> ip = Optional.empty();
     try {
       if (args.length == 1) {
@@ -95,7 +95,6 @@ public class BPJsRobotControl {
       }
 
       // ------ Load config
-
       java.util.List<String> conf = Arrays.asList(readResource("config.txt").split("\n"));
       Iterator<String> conIt = conf.iterator();
       while (conIt.hasNext()) {
@@ -106,15 +105,14 @@ public class BPJsRobotControl {
           String value = vals[1].trim();
           if (key.equals("simulationIP")) {
             ip = Optional.of(value);
-          }
-          if (key.equals("player1Port")) {
+          } else if (key.equals("player1Port")) {
             player1Port = OptionalInt.of(Integer.parseInt(value));
-          }
-          if (key.equals("player2Port")) {
+          } else if (key.equals("player2Port")) {
             player2Port = OptionalInt.of(Integer.parseInt(value));
-          }
-          if (key.equals("refereePort")) {
+          } else if (key.equals("refereePort")) {
             refereePort = OptionalInt.of(Integer.parseInt(value));
+          } else if (key.equals("possessionTimer")) {
+            possessionTimer = OptionalInt.of(Integer.parseInt(value.substring(0, value.length() - 1)));
           }
         }
       }
@@ -125,7 +123,8 @@ public class BPJsRobotControl {
       System.exit(-1);
     }
 
-    BPJsRobotControl control = new BPJsRobotControl(ip, player1Port, player2Port, refereePort, playerId);
+    BPJsRobotControl control =
+        new BPJsRobotControl(ip, player1Port, player2Port, refereePort, playerId, possessionTimer);
     control.start();
   }
 }

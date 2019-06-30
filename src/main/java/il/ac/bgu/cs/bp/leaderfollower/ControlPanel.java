@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import il.ac.bgu.cs.bp.leaderfollower.events.StaticEvents;
+import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import java.awt.Color;
 import java.awt.Font;
@@ -90,7 +90,7 @@ public class ControlPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    bp.enqueueExternalEvent(StaticEvents.START_CONTROL);
+                    bp.enqueueExternalEvent(new BEvent("Start Control"));
                     System.out.println("SimStarted");
                 }
             }
@@ -102,7 +102,7 @@ public class ControlPanel {
         Startbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bp.enqueueExternalEvent(StaticEvents.START_CONTROL);
+                bp.enqueueExternalEvent(new BEvent("Start Control"));
                 System.out.println("SimStarted");
             }
         });

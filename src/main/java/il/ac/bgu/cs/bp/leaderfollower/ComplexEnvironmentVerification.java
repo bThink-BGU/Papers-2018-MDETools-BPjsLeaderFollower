@@ -4,7 +4,6 @@ import il.ac.bgu.cs.bp.bpjs.analysis.BThreadSnapshotVisitedStateStore;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsBProgramVerifier;
 import il.ac.bgu.cs.bp.bpjs.analysis.DfsTraversalNode;
 import il.ac.bgu.cs.bp.bpjs.analysis.VerificationResult;
-import il.ac.bgu.cs.bp.bpjs.analysis.listeners.BriefPrintDfsVerifierListener;
 import il.ac.bgu.cs.bp.bpjs.analysis.violations.Violation;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.bpjs.model.ResourceBProgram;
@@ -31,7 +30,7 @@ public class ComplexEnvironmentVerification {
         // Create the verifier
         DfsBProgramVerifier vfr = new DfsBProgramVerifier();
         vfr.setMaxTraceLength(500);
-        vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
+        // vfr.setProgressListener( new BriefPrintDfsVerifierListener() );
         vfr.setVisitedNodeStore( new BThreadSnapshotVisitedStateStore() );
         
         VerificationResult verificationResult = vfr.verify(model);
@@ -46,7 +45,7 @@ public class ComplexEnvironmentVerification {
                 // System.out.println("Verification message: " + verificationResult.getFailedAssertion().getMessage());
             // }
             
-            v.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
+            // v.getCounterExampleTrace().forEach( n->prettyPrintNode(n, System.out) );
         } else {
             System.out.println("No counter example found.");
         }
@@ -58,7 +57,7 @@ public class ComplexEnvironmentVerification {
         n.getSystemState().getBThreadSnapshots().stream()
             .sorted( (a,b)->a.getName().compareTo(b.getName()) )
             .forEach( btss -> {
-                out.printf(" %s: r:%s\tw:%s\tb:%s\n", btss.getName(), btss.getBSyncStatement().getRequest(), btss.getBSyncStatement().getWaitFor(), btss.getBSyncStatement().getBlock());
+                // out.printf(" %s: r:%s\tw:%s\tb:%s\n", btss.getName(), btss.getBSyncStatement().getRequest(), btss.getBSyncStatement().getWaitFor(), btss.getBSyncStatement().getBlock());
             });
     }
 }

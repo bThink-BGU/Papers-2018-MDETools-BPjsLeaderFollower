@@ -7,13 +7,13 @@ import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 public class ParameterizedMove extends BEvent implements java.io.Serializable {
 
     public final Integer powerForward;
-    public final Integer powerRight;
+    public final Integer powerLeft;
     public final Integer spin;
 
     public ParameterizedMove(Integer powerForward, Integer powerLeft, Integer spin) {
         super(String.format("ParameterizedMove(%d,%d,%d)", powerForward, powerLeft, spin));
         this.powerForward = powerForward;
-        this.powerRight = powerLeft;
+        this.powerLeft = powerLeft;
         this.spin = spin;
     }
 
@@ -21,7 +21,7 @@ public class ParameterizedMove extends BEvent implements java.io.Serializable {
     public int hashCode() {
         int hash = 7;
         if(powerForward != null) hash = 89 * hash + this.powerForward;
-        if(powerRight != null) hash = 89 * hash + this.powerRight;
+        if(powerLeft != null) hash = 89 * hash + this.powerLeft;
         if(spin != null) hash = 89 * hash + this.spin;
         return hash;
     }
@@ -39,8 +39,6 @@ public class ParameterizedMove extends BEvent implements java.io.Serializable {
         }
         final ParameterizedMove other = (ParameterizedMove) obj;
         return Objects.equals(other.powerForward, this.powerForward) &&
-            Objects.equals(other.powerRight, this.powerRight);
+            Objects.equals(other.powerLeft, this.powerLeft);
     }
-
-
 }

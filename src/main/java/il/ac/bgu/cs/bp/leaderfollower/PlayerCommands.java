@@ -26,11 +26,16 @@ public class PlayerCommands {
     System.out.println(playerName + ",moveForward(100)");
   }
 
-  public void parameterizedMove(Integer powerForward, Integer powerLeft, Integer spin) {
+  public void parameterizedMove(Integer powerForward, Integer powerLeft, Integer spin)
+      throws InterruptedException {
     // System.out.println("f: "+powerForward + ",r: "+powerLeft+",s: "+spin);
     if(powerForward != null) player.noReply(playerName + ",moveForward(" + powerForward + ")");
     if(powerLeft != null) player.noReply(playerName + ",moveRight(" + powerLeft + ")");
-    if(spin != null) player.noReply(playerName + ",spin(" + spin + ")");
+    if(spin != null) {
+      player.noReply(playerName + ",spin(" + spin + ")");
+      Thread.sleep(10);
+      player.noReply(playerName + ",spin(0)");
+    }
   }
 
   public void right() {
