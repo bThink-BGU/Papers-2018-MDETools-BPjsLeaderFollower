@@ -8,9 +8,9 @@ public class PlayerCommands {
   private SocketCommunicator player;
   private final String ip;
   private final int port;
+  private boolean moving = false;
 
-  public PlayerCommands(String playerName, String simulationIp, int playerPort)
-      throws IOException {
+  public PlayerCommands(String playerName, String simulationIp, int playerPort) throws IOException {
     this.playerName = playerName;
     this.ip = simulationIp;
     this.port = playerPort;
@@ -21,66 +21,61 @@ public class PlayerCommands {
     player.connectToServer(this.ip, this.port);
   }
 
-  public void forward() {
-    player.noReply(playerName + ",moveForward(100)");
-    System.out.println(playerName + ",moveForward(100)");
+  public void forward(int power, int sleep) throws InterruptedException {
+    player.noReply(playerName + ",moveForward(" + power + ")");
+    System.out.println(playerName + ",moveForward(" + power + ")");
+    moving = power != 0;
+    Thread.sleep(sleep);
   }
 
-  public void parameterizedMove(Integer powerForward, Integer powerLeft, Integer spin)
+  public void parameterizedMove(Integer powerForward, Integer powerLeft, Integer spin, int sleep)
       throws InterruptedException {
-    // System.out.println("f: "+powerForward + ",r: "+powerLeft+",s: "+spin);
-    if(powerForward != null) player.noReply(playerName + ",moveForward(" + powerForward + ")");
-    if(powerLeft != null) player.noReply(playerName + ",moveRight(" + powerLeft + ")");
-    if(spin != null) {
-      player.noReply(playerName + ",spin(" + spin + ")");
-      Thread.sleep(10);
-      player.noReply(playerName + ",spin(0)");
+    if (powerForward != null) {
+      this.forward(powerForward, sleep);
+    }
+    if (powerLeft != null) {
+      this.left(powerLeft, sleep);
+    }
+    if (spin != null) {
+      this.stopMoving(sleep);
+      this.spinR(spin, sleep);
+      Thread.sleep(sleep);
+      this.spinR(0, sleep);
     }
   }
 
-  public void right() {
-    player.noReply(playerName + ",moveRight(-100)");
-    System.out.println(playerName + ",moveRight(-100)");
+  public void left(int power, int sleep) throws InterruptedException {
+    player.noReply(playerName + ",moveRight(" + power + ")");
+    System.out.println(playerName + ",moveRight(" + power + ")");
+    moving = power != 0;
+    Thread.sleep(sleep);
   }
 
-  public void left() {
-    player.noReply(playerName + ",moveRight(100)");
-    System.out.println(playerName + ",moveRight(100)");
+  public void spinR(int power, int sleep) throws InterruptedException {
+    player.noReply(playerName + ",spin(" + power + ")");
+    System.out.println(playerName + ",spin(" + power + ")");
+    Thread.sleep(sleep);
   }
 
-  public void backward() {
-    player.noReply(playerName + ",moveForward(-100)");
-    System.out.println(playerName + ",moveForward(-100)");
-  }
-
-  public void spinR() {
-    player.noReply(playerName + ",spin(100)");
-    System.out.println(playerName + ",spin(100)");
-  }
-
-  public void spinL() {
-    player.noReply(playerName + ",spin(-100)");
-    System.out.println(playerName + ",spin(-100)");
-  }
-
-  public void suck() {
+  public void suck(int sleep) throws InterruptedException {
     player.noReply(playerName + ",setSuction(-100)");
     System.out.println(playerName + ",setSuction(-100)");
+    Thread.sleep(sleep);
   }
 
-  public void expel() {
+  public void expel(int sleep) throws InterruptedException {
     player.noReply(playerName + ",setSuction(100)");
     System.out.println(playerName + ",setSuction(100)");
+    Thread.sleep(sleep);
   }
 
-  public void stopMoving() {
+  public void stopMoving(int sleep) throws InterruptedException {
+    if (!moving)
+      return;
     player.noReply(playerName + ",stop()");
     System.out.println(playerName + ",stop()");
-  }
-
-  public void stopSpinning() {
-    player.noReply(playerName + ",spin(0)");
-    System.out.println(playerName + ",spin(0)");
+    moving = false;
+    Thread.sleep(sleep);
   }
 
   public GpsData getPlayerGps() {

@@ -23,7 +23,4 @@ public class GoToTarget extends BasicEntity {
     public String toString() {
         return "GoToTarget_" + target;
     }
-    /*
-     * public GoToTarget(String target) { super("GoToTarget_" + target); this.target = target; }
-     */
 }

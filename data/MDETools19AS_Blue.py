@@ -1,3 +1,24 @@
+
+
+
+
+
+
+Skip to content
+Using Gmail with screen readers
+
+Conversations
+
+All
+ 
+1–50 of 371
+ 
+486.81 GB (42%) of 1,143 GB used
+Manage
+Terms · Privacy · Program Policies
+Last account activity: 4 minutes ago
+Details
+
 from z3 import Bool, Reals, And, Or, is_true, BoolSort, simplify, Ints
 from z3 import is_rational_value, Solver, sat, Not, RealVal
 from z3 import *
@@ -223,6 +244,7 @@ def logger():
                          stringout="player1,moveForward(0)\n"
                          roverSocket.sendall(stringout.encode('utf-8'))
                          print (stringout)
+                         time.sleep(0.01)
                          stringout="player1,spin(100)\n"
                          roverSocket.sendall(stringout.encode('utf-8'))
                          print (stringout)
@@ -344,5 +366,4 @@ run([
        logger(),
        telemUpdater()
 ])
-
 

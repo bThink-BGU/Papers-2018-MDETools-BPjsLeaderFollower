@@ -1,0 +1,3 @@
+player1Port = 9001
+player2Port = 9003
+refereePort = 9007

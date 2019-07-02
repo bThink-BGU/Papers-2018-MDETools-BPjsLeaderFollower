@@ -18,7 +18,8 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = "TimeoutInASecond", query = "SELECT r FROM Referee r WHERE r.ballPosession = r.playerName AND r.timeout IS NOT NULL AND r.timeout=1"),
         @NamedQuery(name = "UpdateTimeout", query = "Update Referee r set r.timeout=:timeout"),
         @NamedQuery(name = "UpdatePosession", query = "Update Referee r set r.ballPosession=:posession"),
-        @NamedQuery(name = "UpdateScore", query = "Update Referee r set r.myScore=:myScore, r.opponentScore=:opponentScore"),
+        @NamedQuery(name = "UpdateMyScore", query = "Update Referee r set r.myScore=:score"),
+        @NamedQuery(name = "UpdateOpponentScore", query = "Update Referee r set r.opponentScore=:score"),
         @NamedQuery(name = "MarkGameAsOver", query = "Update Referee r set r.gameOver = true"),})
 public class Referee extends BasicEntity {
     @Column

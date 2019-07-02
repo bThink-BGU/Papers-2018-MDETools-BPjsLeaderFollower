@@ -4,9 +4,10 @@ import il.ac.bgu.cs.bp.bpjs.context.ContextService;
 import il.ac.bgu.cs.bp.bpjs.execution.listeners.BProgramRunnerListenerAdapter;
 import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
-import il.ac.bgu.cs.bp.bpjs.model.eventselection.PrioritizedBSyncEventSelectionStrategy;
 import static il.ac.bgu.cs.bp.leaderfollower.SourceUtils.readResource;
 import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
+import il.ac.bgu.cs.bp.leaderfollower.eventListeners.Actuator;
+import il.ac.bgu.cs.bp.leaderfollower.eventListeners.TimeoutNotifier;
 import java.util.*;
 import java.io.IOException;
 
@@ -28,7 +29,8 @@ public class BPJsRobotControl {
   private final int playerId;
   private final BProgram bprog;
   private final ContextService contextService;
-  private final Communicator communicator;
+  private final TelemetryCollector telemetryCollector;
+  private final Actuator actuator;
 
   public BPJsRobotControl(Optional<String> simulationIp, OptionalInt player1Port,
       OptionalInt player2Port, OptionalInt refereePort, OptionalInt thePlayerId, OptionalInt possessionTime)
@@ -52,11 +54,13 @@ public class BPJsRobotControl {
     // SwingUtilities.invokeLater(() -> {
     this.controlPanel = new ControlPanel(bprog);
     // });
-    this.referee = new RefereeListener(this.ip, refereePort.orElse(9007), bprog, controlPanel, possessionTimer);
-    this.communicator = new Communicator(bprog, playerCommands, player, controlPanel);
+    this.referee = new RefereeListener(this.ip, refereePort.orElse(9007), bprog, controlPanel);
+    this.telemetryCollector = new TelemetryCollector(bprog, playerCommands, player, controlPanel);
+    this.actuator = new Actuator(playerCommands, this.telemetryCollector);
 
     // contextService.addListener(new PrintBProgramRunnerListener());
-    contextService.addListener(communicator);
+    contextService.addListener(actuator);
+    contextService.addListener(new TimeoutNotifier(possessionTimer));
     contextService.addListener(new BProgramRunnerListenerAdapter() {
       @Override
       public void eventSelected(BProgram bp, BEvent theEvent) {
@@ -67,7 +71,8 @@ public class BPJsRobotControl {
           }
           controlPanel.Startbutton.setEnabled(false);
           referee.start();
-          communicator.start();
+          // telemetryCollector.start();
+          actuator.start();
         }
       }
     });
@@ -95,7 +100,7 @@ public class BPJsRobotControl {
       }
 
       // ------ Load config
-      java.util.List<String> conf = Arrays.asList(readResource("config.txt").split("\n"));
+      java.util.List<String> conf = Arrays.asList(readResource("GameSettings.txt").split("\n"));
       Iterator<String> conIt = conf.iterator();
       while (conIt.hasNext()) {
         String a = conIt.next();

@@ -1,6 +1,0 @@
-player1Port = 9001
-player2Port = 9003
-simulationIP = 127.0.0.1
-gameTime = 240
-possessionTimer = 10s
-penaltyTime = 5s

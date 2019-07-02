@@ -7,21 +7,14 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
-import il.ac.bgu.cs.bp.bpjs.execution.listeners.BProgramRunnerListenerAdapter;
-import il.ac.bgu.cs.bp.bpjs.model.BEvent;
 import il.ac.bgu.cs.bp.bpjs.model.BProgram;
 import il.ac.bgu.cs.bp.leaderfollower.PlayerCommands.GpsData;
-import il.ac.bgu.cs.bp.leaderfollower.events.ParameterizedMove;
 import il.ac.bgu.cs.bp.leaderfollower.events.Telemetry;
 
-public class Communicator extends BProgramRunnerListenerAdapter implements Runnable {
-  private final BlockingQueue<BEvent> eventsQueue = new LinkedBlockingQueue<>();
+public class TelemetryCollector implements Runnable {
   private final int maxSteps = 310;
   private Double[] d2TAllTime = new Double[maxSteps];
   private Double[] disAllTime = new Double[maxSteps];
@@ -33,7 +26,7 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
   private final GpsData playerGate;
   private Thread thread;
 
-  public Communicator(BProgram bp, PlayerCommands player, PlayerData data,
+  public TelemetryCollector(BProgram bp, PlayerCommands player, PlayerData data,
       ControlPanel controlPanel) {
     this.bp = bp;
     this.player = player;
@@ -41,48 +34,26 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
     this.playerGate = data.gate;
   }
 
+  @Deprecated
   @Override
   public void run() {
     try {
-      Thread.sleep(200);
-      int sleep = 30;
       while (true) {
-        BEvent e = eventsQueue.poll(sleep, TimeUnit.MILLISECONDS);
-        sleep = 30;
-        if (e == null) {
-          collectTelemetry();
-        } else if (e.name.equals("Suck")) {
-          player.suck();
-        } else if (e.name.equals("Expel")) {
-          player.expel();
-        } else if (e instanceof ParameterizedMove) {
-          ParameterizedMove move = (ParameterizedMove) e;
-          player.parameterizedMove(move.powerForward, move.powerLeft, move.spin);
-          // if(move.spin != null) sleep -= 10;
-        }
+        Thread.sleep(100);
+        collectTelemetry();
       }
     } catch (InterruptedException ex) {
       Logger.getLogger(BPJsRobotControl.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
-  @Override
-  public void eventSelected(BProgram bp, BEvent theEvent) {
-    if (theEvent instanceof ParameterizedMove || theEvent.name.equals("Suck")
-    || theEvent.name.equals("Expel"))
-      try {
-        eventsQueue.put(theEvent);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-  }
-  
-  public void start() { 
+  @Deprecated
+  public void start() {
     thread = new Thread(this);
     thread.start();
   }
-  
-  private void collectTelemetry() {
+
+  public void collectTelemetry() {
     GpsData playerGpsData, ballGpsData;
     Double playerCompassDeg;
     try {
@@ -93,7 +64,7 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
       Logger.getLogger(BPJsRobotControl.class.getName()).log(Level.SEVERE, "NO TELEMETRY RECIEVED");
       return;
     }
-    
+
     Telemetry t = new Telemetry(playerGpsData, ballGpsData, playerGate, playerCompassDeg);
 
     SwingUtilities.invokeLater(() -> {
@@ -129,7 +100,7 @@ public class Communicator extends BProgramRunnerListenerAdapter implements Runna
   }
 
   // file read
-  public static void writeToFile(String fileName, String dataInfo, Double[] theArray)
+  private static void writeToFile(String fileName, String dataInfo, Double[] theArray)
       throws IOException {
     FileWriter fW = new FileWriter(fileName, true);
     BufferedWriter bW = new BufferedWriter(fW);
